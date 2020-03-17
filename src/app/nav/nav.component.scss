@@ -1,0 +1,222 @@
+$myColor: #0070ad;
+
+nav {
+    width: 100vw;
+    height: 70px;
+    position: relative;
+    line-height: 70px;
+    color: $myColor;
+    background-color: rgb(241, 241, 241);
+}
+
+// menu button
+
+.nav-container-button{
+    position: absolute;
+    left:20px;
+    height: 30px;
+    top: 25px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+.nav-menu-cross{
+    position: absolute;
+    border: 1px solid black;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    right: 0%;
+}
+
+// main logo
+.nav-brand {
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    letter-spacing: 3px;
+    font-weight: bolder;
+    font-size: 18px;
+    cursor: pointer;
+    white-space: nowrap;
+    &:hover .nav-brand-image{
+        animation: moveSteeringWheel 1s linear;
+    }
+}
+.nav-select-language {
+    position: absolute;
+    right:0;
+}
+.nav-brand-textTwo, .nav-brand-textOne {
+    color: black;
+}
+
+// language 
+.nav-select-language{
+    right: 20px;
+    text-align: center;
+    z-index: 2;
+}
+.language {
+    cursor: pointer;
+}
+.arrow {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+.nav-languages {
+    overflow: hidden;
+    border-bottom: 1px solid black;
+    max-height: 0;
+    opacity: 0;
+    transition: linear 1s all;
+}
+.nav-languages--open {
+    max-height: 246px;
+    opacity: 1;
+}
+.nav-languages-menu {
+    padding: 0;
+    margin: 0;
+}
+.nav-language-element {
+    text-align: left;
+    padding:0 10px;
+    margin: 0;
+    list-style-type: none;
+    cursor: pointer;
+    transition: transform 200ms linear;
+    &:hover{
+        transform: scale(1.05);
+    }
+}
+// main menu list 
+.nav-menu{
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    background-color: rgb(241, 241, 241);
+    width: 100%;
+    top: 70px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    z-index: 1;
+    transition: 500ms linear all;
+}
+.nav-menu--open {
+    max-height: 100vh;
+    opacity: 1;
+}
+.nav-list {
+    padding:0;
+    margin: 0;
+}
+.nav-element {
+    list-style-type: none;
+    text-align: center;
+    line-height: 50px;  
+    letter-spacing: 3px;
+    &:hover span{
+        animation: test 400ms linear forwards;
+    }
+    &:hover .nav-menu-image{
+        animation: showImage 300ms 200ms linear forwards;
+    }
+    &:first-child {
+        border-top: 1px solid rgb(228, 228, 228);
+    }
+}
+.nav-link {
+    color: black;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    position: relative;
+}
+.nav-menu-image{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+}
+.select-mode {
+    text-align: center;
+}
+.mode {
+    cursor: pointer;
+    font-size: 1em;
+}
+.mode-day {
+    margin-left: 10px;
+}
+.mode-night {
+    margin-right: 10px;
+}
+@keyframes showImage{
+    from {
+        opacity: 0;
+    }
+    to {
+
+        opacity: 1;
+    }
+}
+
+@keyframes test {
+    from {
+        letter-spacing: 3px;
+        opacity: 1;
+    }
+    to {
+        letter-spacing: 30px;
+        opacity: 0;
+    }
+}
+
+@keyframes moveSteeringWheel{
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(35deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-35deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@media(max-width: 600px) {
+    .nav-select-language{
+        right: 5px; 
+    }
+    .nav-language-fullname {
+        display: none;
+    }
+}
+
+@media(max-width: 500px) {
+    .nav-select-language{
+        right: 1px; 
+    }
+    .nav-brand {
+        font-size: 10px;
+    }
+    .nav-language-fullname {
+        display: none;
+    }
+}
