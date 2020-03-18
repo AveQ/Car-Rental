@@ -1,0 +1,45 @@
+$myColor: #0070ad;
+
+.underImageText {
+    display: block;
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 140px;
+    font-family: 'Abril Fatface', cursive;
+    font-weight: 600;
+    font-size: 30px;
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -70px;
+        left: 50%;
+        width: 140px;
+        border:1px solid $myColor;
+        transform: translateX(-50%);
+    }
+}
+.contForOffer{
+    margin:20px 5px;
+    border: 2px solid rgb(228, 228, 228);
+    height: 450px;
+    text-align: center;
+    padding:5px;
+}
+.offer {
+    justify-content: space-between;
+}
+.text-headling {
+    height: 70px;
+}
+.text-paragraph {
+    width: 300px;
+    display: inline-block;
+}
+.container-image {
+    height: 200px;
+    line-height: 200px;
+}
+.image-offer {
+    
+}

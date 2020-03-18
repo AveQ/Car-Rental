@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
   isLanguageMenuOpen = false;
-  isMainmenuOpen = true;
+  isMainmenuOpen = false;
   constructor() { }
 
   ngOnInit(): void {
