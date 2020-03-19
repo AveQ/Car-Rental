@@ -1,4 +1,6 @@
 $myColor: #0070ad;
+$lightMode: rgb(241, 241, 241);
+$darkMode: rgb(129, 129, 129);
 
 .homepage-image{
     position: relative;
@@ -57,6 +59,28 @@ $myColor: #0070ad;
     &:hover {
         background-color: $myColor;
         color: white;
+    }
+}
+.underImage {
+    background-color: transparent;
+    transition: 500ms linear all;
+    padding-bottom: 100px;
+}
+.underImage--darkMode {
+    background-color: $darkMode;
+    
+}
+.footer {
+    background-color: $lightMode;
+    position: relative;
+    &::after{
+        content: '';
+        position: absolute;
+        top: -50px;
+        transform: rotate(0.5deg);
+        height: 90px;
+        background-color: $lightMode;
+        width: 100%;
     }
 }
 @media(max-width: 700px){

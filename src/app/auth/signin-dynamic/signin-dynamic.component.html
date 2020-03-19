@@ -1,0 +1,52 @@
+
+<div class="auth__background" (click) = "closeComponent()"></div>
+<div class="auth__box">
+    <h3 class="auth__paragraph">Welcome!</h3>
+        <form autocomplete="off" [formGroup] = 'signinForm' (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label 
+                #emailLabel 
+                for="email" 
+                class="form__label"
+                [ngClass] = "onFocus('email')">Email</label>
+                <input 
+                (focus) ="focusonEmail = true"
+                (blur) = "focusonEmail = false"
+                type="text" 
+                class="form__control form__input" 
+                id="email"
+                formControlName = "email">
+            </div>
+            <div class="form-group">
+                <label 
+                #passwordLabel 
+                for="password" 
+                class="form__label"
+                [ngClass] = "onFocus('password')">Password</label>
+                <input 
+                (focus) ="focusonPassword = true"
+                (blur) = "focusonPassword = false"
+                type="password" 
+                id="password" 
+                class="form__control form__input"
+                formControlName = "password">
+            </div>
+            <!-- <p 
+            *ngIf = "(this.signinForm.get('email').invalid && this.signinForm.get('email').touched) ||
+                    (this.signinForm.get('password').invalid && this.signinForm.get('password').touched )  "
+             class="form__info">
+                Invalid email or password!
+            </p> -->
+            <button 
+            type="submit" 
+            class="btn btn-outline-dark"
+            [disabled] = "signinForm.invalid">Login</button>
+        </form>
+        <hr>
+        <p>Don't have an account?</p>
+        <div class="button__cont">
+            <button class="btn btn-outline-dark">Sign up</button>
+            <button class="btn btn-dark" (click) = "closeComponent()">Exit</button>
+        </div>
+</div>
+

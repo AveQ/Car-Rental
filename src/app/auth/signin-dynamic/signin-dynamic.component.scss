@@ -1,0 +1,80 @@
+
+.auth__background {
+    position: fixed;
+    height: 100vh ;
+    width: 100%;
+    top:0;
+    left:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  .auth__box {
+      position: absolute; 
+      top:50%;
+      left:50%;
+      font-family: 'Abril Fatface', cursive;
+      font-size: 24px;
+      transform: translateX(-50%) translateY(-50% );  // for issue with blurry text if position is fix
+      z-index: 0;
+      padding:40px;
+      background-color: white;
+      border-radius: 4px;
+      z-index: 11;
+  }
+  .auth__paragraph{
+    text-align: center;
+  }
+  .form__label {
+      position: absolute;
+      left:5px;
+      top: 15px;
+      color: #999;
+      background-color: #fff;
+      z-index:11;
+      transition: all 300ms ease-out;
+  }
+  .form__label--inputfocus{
+      left: 2px;
+      top: -7px;
+      font-size: 13px;
+  }
+  .form__input {
+      position: relative;
+      padding: 12px 0px 5px 0;
+      width: 100%;
+      outline: 0;
+      border: 0;
+      box-shadow: 0 1px 0 0 #e5e5e5;
+      box-shadow: 0 0 0 0 red;
+      border-bottom: 2px solid #e5e5e5;
+      transition: box-shadow 150ms ease-out;
+      &:focus {
+        
+      }
+    }
+    input.ng-touched.ng-invalid {
+      box-shadow: 0 0 0 0 red;
+      border-bottom: 2px solid red;
+    }
+    .form-group {
+      position:relative;  
+      & + .form-group {
+        margin-top: 10px;
+      }
+    }
+    .form__info {
+      font-size: 13px;
+      text-align: center;
+      color: red;
+    }
+    .button__cont {
+      justify-content: space-between;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: flex;
+    }
+    #password {
+        margin-bottom: 10px;
+    }
+  

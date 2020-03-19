@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DarkModeService } from '../darkMode.service';
 
 @Component({
   selector: 'app-homepage',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modeSerive: DarkModeService) { }
 
   ngOnInit(): void {
+  }
+
+  changeMode(value) {
+    return this.modeSerive.changeMode(value);
   }
 
 }

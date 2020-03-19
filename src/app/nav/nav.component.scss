@@ -1,12 +1,17 @@
 $myColor: #0070ad;
-
+$lightMode: rgb(241, 241, 241);
+$darkMode: rgb(129, 129, 129);
 nav {
     width: 100%;
     height: 70px;
     position: relative;
     line-height: 70px;
     color: $myColor;
-    background-color: rgb(241, 241, 241);
+    background-color: $lightMode; /////////////////////////////////
+    transition: 500ms linear all;
+}
+.nav--darkmode {
+    background-color: $darkMode;
 }
 
 // menu button
@@ -81,8 +86,8 @@ nav {
     max-height: 0;
     opacity: 0;
     transition: linear 1s all;
-    background-color: rgb(187, 187, 187);
 }
+
 .nav-languages--open {
     max-height: 246px;
     opacity: 1;
@@ -106,7 +111,7 @@ nav {
 .nav-menu{
     font-family: 'Montserrat', sans-serif;
     position: absolute;
-    background-color: rgb(241, 241, 241);
+    background-color: $lightMode;
     width: 100%;
     top: 70px;
     max-height: 0;
@@ -114,6 +119,9 @@ nav {
     overflow: hidden;
     z-index: 1;
     transition: 500ms linear all;
+}
+.nav-menu--darkmode { ////////////////////////////
+    background-color: $darkMode;
 }
 .nav-menu--open {
     max-height: 100vh;
@@ -138,10 +146,20 @@ nav {
         border-top: 1px solid rgb(228, 228, 228);
     }
 }
+.nav-element--darkmode{////////////////
+    &:first-child {
+        border-top: 1px solid rgb(104, 103, 103);
+    }
+}
 .nav-link {
     color: black;
     border-bottom: 1px solid rgb(228, 228, 228);
     position: relative;
+}
+.nav-link--darkmode {///////////////
+    
+    border-bottom: 1px solid rgb(104, 103, 103);
+    
 }
 .nav-menu-image{
     position: absolute;
