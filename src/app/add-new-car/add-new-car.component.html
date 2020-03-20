@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 panel-main-text">
+            <h1>Add new car to your rental</h1>
+        </div>
+    </div>
+    <form autocomplete="off" [formGroup] = 'newCarForm' (ngSubmit) = "onSubmit()">
+        <div class="row">
+            <div class="col-sm-4 col-12">
+                <label for="carBrand" class="panel-text">Car Brand</label>
+                <input formControlName="brand" id="carBrand" type="text" class="col-12 col-sm-10 form-control panel-input">
+            </div>
+            <div class="col-sm-4 col-12">    
+                <label for="carModel" class="panel-text">Car Model</label>
+                <input formControlName = "model" id="carModel" type="text" class="col-12 col-sm-10 form-control panel-input">
+            </div>
+            <div class="col-sm-4 col-12">
+                <label for="mileage" class="panel-text">Vehicle Mileage</label>
+                <input formControlName = "mileage" id="mileage" type="text" class="col-12 col-sm-10 form-control panel-input">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-4 col-12">
+                <label for="engineCapacity" class="panel-text">Engine Capacity</label>
+                <input formControlName="engineCapacity" id="engineCapacity" type="text" class="col-12 col-sm-10 form-control panel-input">
+            </div>
+            <div class="col-sm-4 col-12">    
+                <label for="horsepower" class="panel-text">Horsepower</label>
+                <input formControlName = "horsepower" id="horsepower" type="text" class="col-12 col-sm-10 form-control panel-input">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7  form-group equipment">
+                <label class="panel-text" for="equipment">Additional Equipment</label>
+                <select multiple class="form-control" name="" id="">
+                    <option #value (click) = "selectOption(value)" *ngFor = "let item of equipment; let i = index" [value] = "i">{{item}}</option>
+                </select>
+                <button class="btn btn-outline-dark btnEquipment" (click) = "addToSelectedEquipment()" type="button">Add</button>
+            </div> 
+            
+        </div>
+        <div class="row">
+            <div class="col-12 contForEq">
+                <label *ngIf = "selectedEquipment.length != 0" class="panel-text panel-text--equipment">Added Equipment</label>
+                <div *ngFor="let item of selectedEquipment;" class="addedEq">
+                    {{item}}
+                    <button type="button" class="btn btn-cross-equipment" (click) = "deleteItem(item)"> 
+                        <span>&times;</span>
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7  form-group image">
+                <label class="panel-text">Image Upload</label>
+                <div class="custom-file">
+                    <input formControlName = "image" type="file" class="custom-file-input" id="image">
+                    <label class="custom-file-label" for="image">Choose file</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="form-group col-12">
+                <label for="description" class=" panel-text">Additional description</label>
+                <textarea formControlName = "description" class="form-control" id="description" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="button-group">
+                <button class="btn btn-outline-dark btn-clear" (click) = "clearForm()">Clear</button>
+                <button class="btn btn-outline-dark btn-submit" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

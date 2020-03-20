@@ -1,0 +1,44 @@
+$myColor: #0070ad;
+$lightMode: rgb(241, 241, 241);
+$darkMode: rgb(129, 129, 129);
+
+.myGoogleMap{
+    border-radius: 10px;
+    border: 2px solid black;
+    margin-bottom:100px;
+}
+.row{
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    margin:0;
+}
+.map {
+    margin-left: auto;
+    margin-right: auto;
+}
+.locationText {
+    display: block;
+    text-align: center;
+    padding-top: 70px;
+    margin-bottom: 140px;
+    font-family: 'Abril Fatface', cursive;
+    font-weight: 600;
+    font-size: 30px;
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        width: 140px;
+        border:1px solid $myColor;
+        transform: translateX(-50%);
+    }
+}
+.underline {
+    position: absolute;
+    top: 0;
+    
+}

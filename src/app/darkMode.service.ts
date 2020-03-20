@@ -23,6 +23,8 @@ export class DarkModeService {
                     return 'underImage--darkMode';
                 case 'underImageBorder':
                     return 'constForOffer--darkMode';
+                case 'localisation':
+                    return 'localisation--darkMode';
                 }
     }
     }

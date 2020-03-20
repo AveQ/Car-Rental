@@ -83,6 +83,15 @@ $darkMode: rgb(129, 129, 129);
         width: 100%;
     }
 }
+.localisation {
+    transform: 500ms linear all;
+}
+.localisation--darkMode{
+    background-color: $darkMode;
+}
+.footer--darkMode {
+    
+}
 @media(max-width: 700px){
     .homepage-text .firstPar {
         font-size: 40px;

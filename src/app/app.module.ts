@@ -11,6 +11,9 @@ import { SigninDynamicComponent } from './auth/signin-dynamic/signin-dynamic.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { DarkModeService } from './darkMode.service';
 import { FooterComponent } from './homepage/footer/footer.component';
+import { LocalisationComponent } from './localisation/localisation.component';
+import { AddNewCarComponent } from './add-new-car/add-new-car.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,12 +23,15 @@ import { FooterComponent } from './homepage/footer/footer.component';
     AboutUsComponent,
     AuthComponent,
     SigninDynamicComponent,
-    FooterComponent
+    FooterComponent,
+    LocalisationComponent,
+    AddNewCarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [DarkModeService],
   bootstrap: [AppComponent]
