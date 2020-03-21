@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DarkModeService } from './darkMode.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'PAW';
+  constructor(private serviceMode: DarkModeService) {}
+  changeMode(value) {
+    return this.serviceMode.changeMode(value);
+  }
 }

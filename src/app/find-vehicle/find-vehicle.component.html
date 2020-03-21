@@ -1,0 +1,123 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-lg-8 col-sm-12">
+            <h1 class="m-auto text-lg-right text-sm-center"></h1>
+        </div>
+        <div class="col-lg-4 col-sm-12 text-lg-right text-sm-center">
+            <button class="btn btn-outline-dark m-3" (click) = 'filters = !filters;'>Filters</button>
+            <button class="btn btn-outline-dark m-3" (click) = 'comparison()'>Comparison</button>
+        </div>
+    </div>
+    <div [ngClass] = "{'filters--open': filters === true}" class="row  border pt-3 filters">
+        <div class="col-3 m-auto text-center">
+            <h5>Car brand</h5> 
+            <div class="form-group">
+                <label for="type"></label>
+                <select 
+                class="custom-select" 
+                id="type"
+                (change) = "markBrand($event.target.value)">
+                    <option value="all">All</option>
+                    <option 
+                    *ngFor = "let car of carName; let i = index" 
+                    value = {{carName[i].name}}
+                    >{{carName[i].name | titlecase}}
+                </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-3 m-auto text-center">
+            <h5>Mark</h5> 
+            <div class="form-group">
+                <label for="type"></label>
+                <select class="custom-select" id="type">
+                    <option 
+                    *ngFor = "let car of carModel; let i = index" 
+                    value = {{carModel[i].id}}
+                    >{{carModel[i].name | titlecase}}
+                </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-3 m-auto text-center">
+            <h5>Year</h5>
+            <div class="form-group">
+                <label for="type"></label>
+                <select class="custom-select" id="type">
+                    <option 
+                    *ngFor = "let year of years; let i = index" 
+                    value = {{years[i].id}}
+                    >{{years[i].name}}
+                </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-3 m-auto text-center">
+            <button class="btn btn-outline-dark">
+                Search
+            </button>
+        </div>
+    </div>
+    <div *ngFor = "let car of carList; let i = index" class="border row car">
+        
+        <div class="col-5 p-0">
+            <img class ="car__img" src="{{carList[i].carImg}}" alt="">
+        </div>
+
+        <div class="col-7 car__info"> <!-- ttttttttttttttttttttttt -->
+            <div class="compare">
+                <div *ngIf = "carList[i].compare" class="check check--compare"></div>
+            </div>
+            <h3 class="car__title">{{carList[i].carBrand}} {{carList[i].carModel}}</h3>
+            
+            <p class="car__engine">Engine capacity: {{carList[i].performance.capacity}} cm&#179; <br>Engine power: {{carList[i].performance.power}} hp</p>
+            <hr>
+            <div class="car__options">
+                <small class="car__additional">
+                    Air Conditioning: 
+                    <div *ngIf="carList[i].equipment.airConditioning; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock>
+                            <div class="check"></div>
+                        </ng-template>
+                        <ng-template #elseBlock>
+                            <div class="cross"></div>
+                        </ng-template>                   
+                </small>
+                <small class="car__additional">
+                    Manual gearbox: 
+                    <div *ngIf="carList[i].equipment.manualGearbox; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock>
+                            <div class="check"></div>
+                        </ng-template>
+                        <ng-template #elseBlock>
+                            <div class="cross"></div>
+                        </ng-template>       
+                </small>
+                <small class="car__additional">
+                    Navigation: 
+                    <div *ngIf="carList[i].equipment.navigation; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock>
+                            <div class="check"></div>
+                        </ng-template>
+                        <ng-template #elseBlock>
+                            <div class="cross"></div>
+                        </ng-template>       
+                </small>
+            </div>
+            <div class="car__btn">
+                <button class="btn btn-outline-dark btn--inforent" (click) = "addToCompare(carList[i])">Compare</button>
+                <button class="btn btn-outline-dark ml-1 btn--inforent">Rent</button>
+            </div>
+
+        </div>
+    </div>
+    <nav class="mt-5">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href = "#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+</div>

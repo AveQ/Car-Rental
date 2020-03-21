@@ -1,0 +1,152 @@
+*{
+    font-family: 'Caladea', serif;
+}
+.car__img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.car {
+    text-align: center;
+    margin-top: 20px;
+    padding:10px;
+}
+.car__info {
+
+}
+.car__title {
+    margin-top: 10px;
+}
+.car__btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+hr {
+    margin: 10px;
+}
+.car__options{
+    // position: absolute;
+    // bottom: 0;
+    // left: 10px;
+    width: 110px;
+}
+.car__additional{
+    display: inline-block;
+    text-align: left;
+    
+}
+.check{
+    display: inline-block;
+    position: relative;
+    height: 10px;
+    width: 10px;
+    &::after{
+        content: '';
+        display: block;
+        width: 5px;
+        margin-left: 2px;
+        height: 10px;
+        border: solid green;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+}
+.check--compare {
+    &::after{
+    position: absolute;
+    bottom: 10px;
+    left: 1px;
+    }
+}
+.cross {
+    display: inline-block;
+    position: relative;
+    height: 10px;
+    width: 10px;
+    margin-left: 2px;
+    &::after{
+        content: '';
+        position: absolute;
+        display: block;
+        width: 5px;
+        height: 10px;
+        border: solid red;
+        border-width: 0 2px 0px 0;
+        top: 0px;
+        transform: rotate(45deg);
+    }
+    &::before{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 5px;
+        top: 2px;
+        height: 10px;
+        border: solid red;
+        border-width: 0 2px 0px 0;
+        transform: rotate(-45deg);
+    }
+}
+.filters {
+    transition: 0.3s linear all;
+    max-height: 0px;
+    opacity: 0;
+    overflow: hidden;
+}
+.filters--open {
+    max-height: 200px;
+    opacity: 1;
+}
+.compare {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+@media (max-width: 767px) {
+    .car__title{
+        margin-top:5px;
+        margin-bottom: 5px;
+        font-size: 15px;
+    }
+    .car__engine{
+        font-size: 12px;;
+    }
+    .car__additional{
+        display: none;
+    }
+    .car__btn{
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .btn--inforent{
+        padding: 2px 10px;
+    }
+    .car__img {
+        max-height: 121px;
+    }
+}
+
+@media (max-width: 565px) {
+    .btn--inforent{
+        padding: 2px 5px;
+        font-size: 12px;
+    }
+    hr{
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 385px) {
+    .btn--inforent{
+        padding: 2px 2px;
+        font-size: 10px;
+    }
+    hr{
+        margin-bottom: 30px;
+    }
+}

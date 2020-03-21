@@ -30,7 +30,6 @@ export class AddNewCarComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    
   }
 
   onSubmit() {

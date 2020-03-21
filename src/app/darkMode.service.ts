@@ -25,6 +25,8 @@ export class DarkModeService {
                     return 'constForOffer--darkMode';
                 case 'localisation':
                     return 'localisation--darkMode';
+                case 'main':
+                    return 'mode--night';
                 }
     }
     }

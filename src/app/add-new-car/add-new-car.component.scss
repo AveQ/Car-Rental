@@ -4,6 +4,7 @@ $darkMode: rgb(129, 129, 129);
 
 .container {
     font-family: 'Abril Fatface', cursive;
+    box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.75);
 }
 .panel-main-text {
     padding: 50px 0px;
@@ -29,7 +30,7 @@ $darkMode: rgb(129, 129, 129);
 .panel-input {
     margin-left: auto;
     margin-right: auto;
-    
+    text-align: center;
 }
 .equipment, .image{
     margin-left: auto;

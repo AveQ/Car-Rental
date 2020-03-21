@@ -1,0 +1,11 @@
+$myColor: #0070ad;
+$lightMode: rgb(241, 241, 241);
+$darkMode: rgb(129, 129, 129);
+
+.mode {
+    transition: 500ms all linear;
+    background-color: transparent;
+}
+.mode--night {
+    background-color: $darkMode;
+}

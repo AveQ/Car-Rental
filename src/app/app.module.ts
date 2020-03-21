@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -14,6 +15,13 @@ import { FooterComponent } from './homepage/footer/footer.component';
 import { LocalisationComponent } from './localisation/localisation.component';
 import { AddNewCarComponent } from './add-new-car/add-new-car.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FindVehicleComponent } from './find-vehicle/find-vehicle.component';
+
+const appRoutes: Routes = [
+  {path: '', component: HomepageComponent},
+  {path: 'new-car', component: AddNewCarComponent},
+  {path: 'vehicles', component: FindVehicleComponent}
+];
 
 @NgModule({
   declarations: [
@@ -25,13 +33,15 @@ import { HttpClientModule } from '@angular/common/http';
     SigninDynamicComponent,
     FooterComponent,
     LocalisationComponent,
-    AddNewCarComponent
+    AddNewCarComponent,
+    FindVehicleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [DarkModeService],
   bootstrap: [AppComponent]
