@@ -14,6 +14,8 @@ export class SigninDynamicComponent implements OnInit {
   focusonEmail: boolean = false;
   focusonPassword: boolean = false;
   dataInvalid: boolean = false;
+  signup: boolean = false;
+
   constructor(private ele: ElementRef, private ren: Renderer2, private siginSer: SigninDynamicService) { }
 
   ngOnInit(): void {
@@ -45,7 +47,6 @@ export class SigninDynamicComponent implements OnInit {
 
   closeComponent() {
     this.siginSer.pushValue(false);
-    
   }
 
 }

@@ -5,11 +5,18 @@
     position: relative;
     width: 100%;
     height: 100%;
+    border-radius: 20px;
+    border: 2px solid black;
 }
 .car {
     text-align: center;
     margin-top: 20px;
     padding:10px;
+    cursor: pointer;
+    transition: all 300ms linear;
+    &:hover {
+        transform: scale(1.02);
+    }
 }
 .car__info {
 
@@ -106,6 +113,30 @@ hr {
     width: 10px;
     border-radius: 50%;
     border: 1px solid black;
+}
+.info-container{
+    width: 100%;
+    padding:0 !important;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height linear 600ms;
+}
+.main-header {
+    margin-top: 20px;
+}
+.info-container--open {
+    max-height: 500px;
+}
+.list-add-info{
+    list-style: none;
+}
+.button-container-info{
+    margin-top: 20px;
+    width: 100%;
+}
+.header-add-inf{
+    
+    
 }
 @media (max-width: 767px) {
     .car__title{

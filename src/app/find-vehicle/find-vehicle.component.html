@@ -1,41 +1,35 @@
+<app-check-date *ngIf="checkDate"></app-check-date>
 <div class="container">
     <div class="row mt-5">
         <div class="col-lg-8 col-sm-12">
             <h1 class="m-auto text-lg-right text-sm-center"></h1>
         </div>
         <div class="col-lg-4 col-sm-12 text-lg-right text-sm-center">
-            <button class="btn btn-outline-dark m-3" (click) = 'filters = !filters;'>Filters</button>
-            <button class="btn btn-outline-dark m-3" (click) = 'comparison()'>Comparison</button>
+            <button class="btn btn-outline-dark m-3" (click)='filters = !filters;'>Filters</button>
+            <button routerLink='/comparison' class="btn btn-outline-dark m-3" (click)='comparison()'>Comparison</button>
         </div>
     </div>
-    <div [ngClass] = "{'filters--open': filters === true}" class="row  border pt-3 filters">
+    <div [ngClass]="{'filters--open': filters === true}" class="row  border pt-3 filters">
         <div class="col-3 m-auto text-center">
-            <h5>Car brand</h5> 
+            <h5>Car brand</h5>
             <div class="form-group">
                 <label for="type"></label>
-                <select 
-                class="custom-select" 
-                id="type"
-                (change) = "markBrand($event.target.value)">
+                <select class="custom-select" id="type" (change)="markBrand($event.target.value)">
                     <option value="all">All</option>
-                    <option 
-                    *ngFor = "let car of carName; let i = index" 
-                    value = {{carName[i].name}}
-                    >{{carName[i].name | titlecase}}
-                </option>
+                    <option *ngFor="let car of carName; let i = index" value={{carName[i].name}}>
+                        {{carName[i].name | titlecase}}
+                    </option>
                 </select>
             </div>
         </div>
         <div class="col-3 m-auto text-center">
-            <h5>Mark</h5> 
+            <h5>Mark</h5>
             <div class="form-group">
                 <label for="type"></label>
                 <select class="custom-select" id="type">
-                    <option 
-                    *ngFor = "let car of carModel; let i = index" 
-                    value = {{carModel[i].id}}
-                    >{{carModel[i].name | titlecase}}
-                </option>
+                    <option *ngFor="let car of carModel; let i = index" value={{carModel[i].id}}>
+                        {{carModel[i].brand | titlecase}}
+                    </option>
                 </select>
             </div>
         </div>
@@ -44,11 +38,8 @@
             <div class="form-group">
                 <label for="type"></label>
                 <select class="custom-select" id="type">
-                    <option 
-                    *ngFor = "let year of years; let i = index" 
-                    value = {{years[i].id}}
-                    >{{years[i].name}}
-                </option>
+                    <option *ngFor="let year of years; let i = index" value={{years[i].id}}>{{years[i].name}}
+                    </option>
                 </select>
             </div>
         </div>
@@ -58,66 +49,112 @@
             </button>
         </div>
     </div>
-    <div *ngFor = "let car of carList; let i = index" class="border row car">
-        
+    <div *ngFor="let car of carList; let i = index" class="border row car">
+
         <div class="col-5 p-0">
-            <img class ="car__img" src="{{carList[i].carImg}}" alt="">
+            <img class="car__img" src="{{carList[i].image}}" alt="">
         </div>
 
-        <div class="col-7 car__info"> <!-- ttttttttttttttttttttttt -->
+        <div class="col-7 car__info">
+            <!-- ttttttttttttttttttttttt -->
             <div class="compare">
-                <div *ngIf = "carList[i].compare" class="check check--compare"></div>
+                <div *ngIf="carList[i].compare" class="check check--compare"></div>
             </div>
-            <h3 class="car__title">{{carList[i].carBrand}} {{carList[i].carModel}}</h3>
-            
-            <p class="car__engine">Engine capacity: {{carList[i].performance.capacity}} cm&#179; <br>Engine power: {{carList[i].performance.power}} hp</p>
+            <h3 class="car__title">{{carList[i].brand}} {{carList[i].model}}</h3>
+
+            <p class="car__engine">Engine capacity: {{carList[i].capacity}} cm&#179; <br>Engine power:
+                {{carList[i].horsepower}} hp</p>
             <hr>
             <div class="car__options">
                 <small class="car__additional">
-                    Air Conditioning: 
-                    <div *ngIf="carList[i].equipment.airConditioning; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock>
-                            <div class="check"></div>
-                        </ng-template>
-                        <ng-template #elseBlock>
-                            <div class="cross"></div>
-                        </ng-template>                   
+                    Air Conditioning:
+                    <div *ngIf="carList[i].airConditioning; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <div class="check"></div>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <div class="cross"></div>
+                    </ng-template>
                 </small>
                 <small class="car__additional">
-                    Manual gearbox: 
-                    <div *ngIf="carList[i].equipment.manualGearbox; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock>
-                            <div class="check"></div>
-                        </ng-template>
-                        <ng-template #elseBlock>
-                            <div class="cross"></div>
-                        </ng-template>       
+                    Manual gearbox:
+                    <div *ngIf="carList[i].manual; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <div class="check"></div>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <div class="cross"></div>
+                    </ng-template>
                 </small>
                 <small class="car__additional">
-                    Navigation: 
-                    <div *ngIf="carList[i].equipment.navigation; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock>
-                            <div class="check"></div>
-                        </ng-template>
-                        <ng-template #elseBlock>
-                            <div class="cross"></div>
-                        </ng-template>       
+                    Navigation:
+                    <div *ngIf="carList[i].navigation; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <div class="check"></div>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <div class="cross"></div>
+                    </ng-template>
                 </small>
             </div>
             <div class="car__btn">
-                <button class="btn btn-outline-dark btn--inforent" (click) = "addToCompare(carList[i])">Compare</button>
-                <button class="btn btn-outline-dark ml-1 btn--inforent">Rent</button>
+                <button class="btn btn-outline-dark btn--inforent" (click)="addToCompare(carList[i])">Compare</button>
+                <button class="btn btn-outline-dark ml-1 btn--inforent" (click)="openCheckComponent(i)">Rent</button>
             </div>
 
         </div>
+        <div class="row button-container-info">
+            <div class="col-12 text-center">
+                <button class="btn btn-outline-dark" (click)="openCarInformation(additInfo, carList[i])">More information</button>
+            </div>
+        </div>
+        <!--
+            Additional Informations
+        -->
+        <div #additInfo class="row info-container">
+            <div class="col-12 header-add-inf">
+                <h3 >Additional informations</h3>
+            </div>
+        <div class="col-6 header-other">
+            <h5 class="main-header">Specyfication</h5>
+            <ul class="list-add-info">
+                <li class="addit-info-car">Brand: {{carList[i].brand}}</li>
+                <li class="addit-info-car">Model: {{carList[i].model}}</li>
+                <li class="addit-info-car">Price: {{carList[i].price}} zł/day</li>
+                <li class="addit-info-car">Mileage: {{carList[i].mileage}} km</li>
+                <li class="addit-info-car">Capacity: {{carList[i].capacity}} cm&#179;</li>
+                <li class="addit-info-car">Horsepower: {{carList[i].horsepower}} hp</li>
+                <li class="addit-info-car">Acceleration: {{carList[i].acceleration}} s</li>
+                <li class="addit-info-car">Year: {{carList[i].year}}</li>
+            </ul>
+        </div>
+        <div class="col-6 header-other">
+            <h5>Equipment</h5>
+            <ul class="list-add-info">
+                <li class="addit-info-car">Manual: {{carList[i].brand}}</li>
+                <li class="addit-info-car">Multifunction: {{carList[i].brand}}</li>
+                <li class="addit-info-car">VentilatedSeats: {{carList[i].brand}}</li>
+                <li class="addit-info-car">HeatedSeats: {{carList[i].brand}}</li>
+                <li class="addit-info-car">Navigation: {{carList[i].brand}}</li>
+                <li class="addit-info-car">AirConditioning: {{carList[i].brand}}</li>
+                <li class="addit-info-car">Sunroof: {{carList[i].brand}}</li>
+                <li class="addit-info-car">Xenon: {{carList[i].brand}}</li>
+                <li class="addit-info-car">Bixenons: {{carList[i].bixenons}}</li>
+            </ul>
+        </div>
+        </div>
+        
+        
+        
     </div>
     <nav class="mt-5">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href = "#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
         </ul>
     </nav>
+    <button (click)="test()">xxx</button>
 </div>

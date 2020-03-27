@@ -1,0 +1,42 @@
+<div class="background" (click)="closeComponent()"></div>
+<div *ngIf="!response" class="cont">
+    <form *ngIf="!response" [formGroup]='dateForm' (ngSubmit)="onSubmit()">
+        <h5 class="pb-2">Your {{carBrand}}</h5>
+        <div class="form-group">
+            <label #emailLabel for="dateStart" class="form__label">Date of rent</label>
+            <input type="date" min={{date}} class="form-control" id="start" formControlName="trip_start">
+        </div>
+        <div class="form-group">
+            <label #emailLabel for="dateEnd" class="form__label">Rental days</label>
+            <input type="number" id="start" name="days" class="form-control" formControlName="days" max='14' min='1'>
+        </div>
+        <p *ngIf="!dateForm.get('days').valid && dateForm.get('days').touched" class="card bg-danger"
+            style="color: white;">Number should be between 1-14</p>
+        <p *ngIf="dateForm.get('trip_start').untouched && dateForm.get('days').untouched" class="card bg-success"
+            style="color: white;">Select day and numbe of days</p>
+        <p *ngIf="dateForm.valid" class="card bg-success" style="color: white;">Check the availability</p>
+        <div class="group-button">
+            <button type="button" class="btn btn-dark" (click)="closeComponent()">Cancel</button>
+            <button type="submit" class="btn btn-outline-dark" [disabled]="dateForm.invalid">Check</button>
+        </div>
+
+    </form>
+</div>
+<div *ngIf="response && available"class="cont cont--response success">
+    <p class="card bg-success">
+        This date is available. <br> Do you want rent this car?
+    </p>
+    <div class="group-button">
+        <button type="button" class="btn btn-dark" (click)="closeComponent()">Cancel</button>
+        <button type="button" class="btn btn-outline-dark">Rent</button>
+    </div>
+</div>
+<div *ngIf="response && !available" class="cont cont--response failed">
+    <p class="card bg-danger">
+        This date is inaccessible. <br> Select other car or date.
+    </p>
+    <div class="group-button">
+        <button type="button" class="btn btn-dark" (click)="closeComponent()">Cancel</button>
+        <button type="button" class="btn btn-outline-dark">Select</button>
+    </div>
+</div>

@@ -16,11 +16,16 @@ import { LocalisationComponent } from './localisation/localisation.component';
 import { AddNewCarComponent } from './add-new-car/add-new-car.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FindVehicleComponent } from './find-vehicle/find-vehicle.component';
+import {ScrollToModule} from 'ng2-scroll-to';
+import { CheckDateComponent } from './find-vehicle/check-date/check-date.component';
+import { ComparisonComponent } from './find-vehicle/comparison/comparison.component';
+import { CarInformationComponent } from './find-vehicle/car-information/car-information.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'new-car', component: AddNewCarComponent},
-  {path: 'vehicles', component: FindVehicleComponent}
+  {path: 'vehicles', component: FindVehicleComponent},
+  {path: 'comparison', component: ComparisonComponent}
 ];
 
 @NgModule({
@@ -34,14 +39,18 @@ const appRoutes: Routes = [
     FooterComponent,
     LocalisationComponent,
     AddNewCarComponent,
-    FindVehicleComponent
+    FindVehicleComponent,
+    CheckDateComponent,
+    ComparisonComponent,
+    CarInformationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ScrollToModule.forRoot()
   ],
   providers: [DarkModeService],
   bootstrap: [AppComponent]

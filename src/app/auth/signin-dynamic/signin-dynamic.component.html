@@ -30,23 +30,30 @@
                 id="password" 
                 class="form__control form__input"
                 formControlName = "password">
-            </div>
-            <!-- <p 
+            </div>          
+            <button 
+            type="submit" 
+            class="btn btn-outline-dark"
+            [disabled] = "signinForm.invalid"
+            >{{signup ? 'Register' : 'Login'}}</button>
+        </form>
+
+        <hr>
+        <p>{{signup ? 'Do you have an account?' : "Don't have an account?"}}</p>
+        <div class="button__cont">
+            <button 
+            class="btn btn-outline-dark"
+            (click) = "signup = !signup"
+            >
+                {{ signup ? 'Sign in' : 'Sign up'}}
+            </button>
+            <button class="btn btn-dark" (click) = "closeComponent()">Exit</button>
+        </div>
+</div>
+
+  <!-- <p 
             *ngIf = "(this.signinForm.get('email').invalid && this.signinForm.get('email').touched) ||
                     (this.signinForm.get('password').invalid && this.signinForm.get('password').touched )  "
              class="form__info">
                 Invalid email or password!
             </p> -->
-            <button 
-            type="submit" 
-            class="btn btn-outline-dark"
-            [disabled] = "signinForm.invalid">Login</button>
-        </form>
-        <hr>
-        <p>Don't have an account?</p>
-        <div class="button__cont">
-            <button class="btn btn-outline-dark">Sign up</button>
-            <button class="btn btn-dark" (click) = "closeComponent()">Exit</button>
-        </div>
-</div>
-
