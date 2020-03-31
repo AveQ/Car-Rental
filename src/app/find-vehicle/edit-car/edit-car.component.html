@@ -1,0 +1,32 @@
+<div class="background-edit-car">
+    <div class="container-edit-car">
+        <div class="panel-edit-car">
+            <div *ngIf='!edit' class="edit-car-question">
+                <h1>What do you want to edit?</h1>
+                <div class="form-group">
+                    <label for="selectValue">Select values</label>
+                    <select multiple class="form-control" name="" id="selectValue">
+                        <option (click)="selectOption(element)" *ngFor="let element of carValues; let i = index"
+                            [value]='i'>{{element | uppercase}}</option>
+                    </select>
+                    <div class="contForItems">
+                        <div *ngFor="let item of selectedEquipment;" class="addedEq">
+                            {{item}}
+                            <button type="button" class="btn btn-cross-equipment" (click)="deleteItem(item)">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="btn-group ">
+                        <button class="btn btn-dark ">Close</button>
+                        <button (click)="addToEdit()" class="btn btn-dark ">Add</button>
+                        <button *ngIf='selectedEquipment.length != 0' class="btn btn-dark">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf='edit' class="edit-car-question">
+
+            </div>
+        </div>
+    </div>
+</div>

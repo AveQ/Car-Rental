@@ -1,4 +1,5 @@
 <app-check-date *ngIf="checkDate"></app-check-date>
+<app-edit-car *ngIf="editCar"></app-edit-car>
 <div class="container">
     <div class="row mt-5">
         <div class="col-lg-8 col-sm-12">
@@ -105,7 +106,7 @@
         </div>
         <div class="row button-container-info">
             <div class="col-12 text-center">
-                <button class="btn btn-outline-dark" (click)="openCarInformation(additInfo, carList[i])">More information</button>
+                <button class="btn btn-outline-dark" (click)="openCarInformation(additInfo)">More information</button>
             </div>
         </div>
         <!--
@@ -113,39 +114,90 @@
         -->
         <div #additInfo class="row info-container">
             <div class="col-12 header-add-inf">
-                <h3 >Additional informations</h3>
+                <h2 >Additional informations</h2>
             </div>
         <div class="col-6 header-other">
             <h5 class="main-header">Specyfication</h5>
+            <hr class="underline-informations">
             <ul class="list-add-info">
                 <li class="addit-info-car">Brand: {{carList[i].brand}}</li>
+                <li *ngIf = 'editMode' class="addit-info-car">
+                    <input #textElement placeholder="Edit value" type="text" class="form-controle input-additional">
+                    <button class="btn btn-danger btn-change-value mb-2" (click) = "patchTextValue(carList[i]._id, textElement, 'brand')">Change</button>
+                </li>
                 <li class="addit-info-car">Model: {{carList[i].model}}</li>
+              <li *ngIf = 'editMode' class="addit-info-car">
+                <input #textElement placeholder="Edit value" type="text" class="form-controle input-additional">
+                <button class="btn btn-danger btn-change-value mb-2" (click) = "patchTextValue(carList[i]._id, textElement, 'model')">Change</button>
+              </li>
                 <li class="addit-info-car">Price: {{carList[i].price}} zł/day</li>
+              <li *ngIf = 'editMode' class="addit-info-car">
+                <input #textElement placeholder="Edit value" type="text" class="form-controle input-additional">
+                <button class="btn btn-danger btn-change-value mb-2" (click) = "patchTextValue(carList[i]._id, textElement, 'price')">Change</button>
+              </li>
                 <li class="addit-info-car">Mileage: {{carList[i].mileage}} km</li>
+              <li *ngIf = 'editMode' class="addit-info-car">
+                <input #textElement placeholder="Edit value" type="text" class="form-controle input-additional">
+                <button class="btn btn-danger btn-change-value mb-2" (click) = "patchTextValue(carList[i]._id, textElement, 'mileage')">Change</button>
+              </li>
                 <li class="addit-info-car">Capacity: {{carList[i].capacity}} cm&#179;</li>
+              <li *ngIf = 'editMode' class="addit-info-car">
+                <input #textElement placeholder="Edit value" type="text" class="form-controle input-additional">
+                <button class="btn btn-danger btn-change-value mb-2" (click) = "patchTextValue(carList[i]._id, textElement, 'capacity')">Change</button>
+              </li>
                 <li class="addit-info-car">Horsepower: {{carList[i].horsepower}} hp</li>
+              <li *ngIf = 'editMode' class="addit-info-car">
+                <input #textElement placeholder="Edit value" type="text" class="form-controle input-additional">
+                <button class="btn btn-danger btn-change-value mb-2" (click) = "patchTextValue(carList[i]._id, textElement, 'horsepower')">Change</button>
+              </li>
                 <li class="addit-info-car">Acceleration: {{carList[i].acceleration}} s</li>
+              <li *ngIf = 'editMode' class="addit-info-car">
+                <input #textElement placeholder="Edit value" type="text" class="form-controle input-additional">
+                <button class="btn btn-danger btn-change-value mb-2" (click) = "patchTextValue(carList[i]._id, textElement, 'acceleration')">Change</button>
+              </li>
                 <li class="addit-info-car">Year: {{carList[i].year}}</li>
+              <li *ngIf = 'editMode' class="addit-info-car">
+                <input #textElement placeholder="Edit value" type="text" class="form-controle input-additional">
+                <button class="btn btn-danger btn-change-value mb-2" (click) = "patchTextValue(carList[i]._id, textElement, 'year')">Change</button>
+              </li>
             </ul>
         </div>
         <div class="col-6 header-other">
-            <h5>Equipment</h5>
+            <h5 class="main-header">Equipment</h5>
+            <hr class="underline-informations">
             <ul class="list-add-info">
-                <li class="addit-info-car">Manual: {{carList[i].brand}}</li>
-                <li class="addit-info-car">Multifunction: {{carList[i].brand}}</li>
-                <li class="addit-info-car">VentilatedSeats: {{carList[i].brand}}</li>
-                <li class="addit-info-car">HeatedSeats: {{carList[i].brand}}</li>
-                <li class="addit-info-car">Navigation: {{carList[i].brand}}</li>
-                <li class="addit-info-car">AirConditioning: {{carList[i].brand}}</li>
-                <li class="addit-info-car">Sunroof: {{carList[i].brand}}</li>
-                <li class="addit-info-car">Xenon: {{carList[i].brand}}</li>
-                <li class="addit-info-car">Bixenons: {{carList[i].bixenons}}</li>
+                <li class="addit-info-car">Manual: <div [ngClass]="carList[i].manual? 'check': 'cross'" ></div></li>
+                <li class="addit-info-car" *ngIf = 'editMode'> <button (click) = "patchVehicle(carList[i]._id, 'manual', !carList[i].manual)" class="btn btn-outline-danger btn-change">Change</button></li>
+                <li class="addit-info-car">Multifunction: <div [ngClass]="carList[i].multifunction? 'check': 'cross'" ></div></li>
+                <li class="addit-info-car" *ngIf = 'editMode'> <button (click) = "patchVehicle(carList[i]._id, 'multifunction', !carList[i].multifunction)" class="btn btn-outline-danger btn-change">Change</button></li>
+                <li class="addit-info-car">VentilatedSeats: <div [ngClass]="carList[i].ventilatedSeats? 'check': 'cross'" ></div></li>
+                <li class="addit-info-car" *ngIf = 'editMode'> <button (click) = "patchVehicle(carList[i]._id, 'ventilatedSeats', !carList[i].ventilatedSeats)" class="btn btn-outline-danger btn-change">Change</button></li>
+                <li class="addit-info-car">HeatedSeats: <div [ngClass]="carList[i].heatedSeats? 'check': 'cross'" ></div></li>
+                <li class="addit-info-car" *ngIf = 'editMode'> <button (click) = "patchVehicle(carList[i]._id, 'heatedSeats', !carList[i].heatedSeats)" class="btn btn-outline-danger btn-change">Change</button></li>
+                <li class="addit-info-car">Navigation: <div [ngClass]="carList[i].navigation? 'check': 'cross'" ></div></li>
+                <li class="addit-info-car" *ngIf = 'editMode'> <button (click) = "patchVehicle(carList[i]._id, 'navigation', !carList[i].navigation)" class="btn btn-outline-danger btn-change">Change</button></li>
+                <li class="addit-info-car">AirConditioning: <div [ngClass]="carList[i].airConditioning? 'check': 'cross'" ></div></li>
+                <li class="addit-info-car" *ngIf = 'editMode'> <button (click) = "patchVehicle(carList[i]._id, 'airConditioning', !carList[i].airConditioning)" class="btn btn-outline-danger btn-change">Change</button></li>
+                <li class="addit-info-car">Sunroof: <div [ngClass]="carList[i].sunroof? 'check': 'cross'" ></div></li>
+                <li class="addit-info-car" *ngIf = 'editMode'> <button (click) = "patchVehicle(carList[i]._id, 'sunroof', !carList[i].sunroof)" class="btn btn-outline-danger btn-change">Change</button></li>
+                <li class="addit-info-car">Xenon: <div [ngClass]="carList[i].xenon? 'check': 'cross'" ></div></li>
+                <li class="addit-info-car" *ngIf = 'editMode'> <button (click) = "patchVehicle(carList[i]._id, 'xenon', !carList[i].xenon)" class="btn btn-outline-danger btn-change">Change</button></li>
+                <li class="addit-info-car">Bixenons: <div [ngClass]="carList[i].bixenons? 'check': 'cross'" ></div></li>
+                <li class="addit-info-car" *ngIf = 'editMode'> <button (click) = "patchVehicle(carList[i]._id, 'bixenons', !carList[i].bixenons)" class="btn btn-outline-danger btn-change">Change</button></li>
             </ul>
         </div>
+        <div class="col-12 text-right">
+            <button class="btn btn-secondary mb-2" (click) = "editThisCar()">Edit</button>
         </div>
-        
-        
-        
+        <div *ngIf = 'editMode' class="col-12 text-center">
+            <button class="btn btn-danger mb-2" (click) = "deleteVehicle(carList[i]._id)">DELETE</button>
+        </div>
+        </div>
+        <!--
+
+        -->
+
+
     </div>
     <nav class="mt-5">
         <ul class="pagination">
@@ -156,5 +208,4 @@
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
         </ul>
     </nav>
-    <button (click)="test()">xxx</button>
 </div>

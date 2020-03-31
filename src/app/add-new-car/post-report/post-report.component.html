@@ -1,0 +1,8 @@
+<div class="background-report">
+  <div class="container-report">
+    <h1 *ngIf = "errorOccured">{{errorOccured? 'Error!' : 'Success!'}}</h1>
+    <p *ngIf = "errorOccured"> {{errorOccured? message : 'You add new vehicle!'}} </p>
+    <button class = "btn btn-outline-dark btn-report">{{errorOccured? 'Accept' : 'OK'}}</button>
+
+  </div>
+</div>

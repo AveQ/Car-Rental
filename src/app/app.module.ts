@@ -14,12 +14,15 @@ import { DarkModeService } from './darkMode.service';
 import { FooterComponent } from './homepage/footer/footer.component';
 import { LocalisationComponent } from './localisation/localisation.component';
 import { AddNewCarComponent } from './add-new-car/add-new-car.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FindVehicleComponent } from './find-vehicle/find-vehicle.component';
 import {ScrollToModule} from 'ng2-scroll-to';
 import { CheckDateComponent } from './find-vehicle/check-date/check-date.component';
 import { ComparisonComponent } from './find-vehicle/comparison/comparison.component';
 import { CarInformationComponent } from './find-vehicle/car-information/car-information.component';
+import { EditCarComponent } from './find-vehicle/edit-car/edit-car.component';
+import {FindVehicleInterceptorService} from './find-vehicle/find-vehicle-interceptor.service';
+import { PostReportComponent } from './add-new-car/post-report/post-report.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomepageComponent},
@@ -42,7 +45,9 @@ const appRoutes: Routes = [
     FindVehicleComponent,
     CheckDateComponent,
     ComparisonComponent,
-    CarInformationComponent
+    CarInformationComponent,
+    EditCarComponent,
+    PostReportComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ScrollToModule.forRoot()
   ],
-  providers: [DarkModeService],
+  providers: [DarkModeService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: FindVehicleInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

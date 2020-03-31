@@ -1,0 +1,55 @@
+.background-edit-car {
+    position: fixed;
+    left: 0;
+    top:0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1;
+
+}
+.container-edit-car {
+    font-family: 'Caladea', serif;
+    background-color: white;
+    padding: 20px;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+}
+.btn-outline-dark {
+    display: block;
+    margin: 20px auto;
+
+}
+
+
+.addedEq {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    margin:5px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: #5a5a5a;
+    color: white;
+    overflow: hidden;
+    & span {
+        font-size: 20px;
+        color: white;
+    }
+}
+
+.btn-cross-equipment{
+    position: absolute;
+    padding:0;
+    top:-8px;
+    right: 4px;   
+}
+.contForItems {
+    text-align: center;
+    width: 450px;
+    margin-top: 20px;
+}
