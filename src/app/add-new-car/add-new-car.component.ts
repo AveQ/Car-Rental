@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
+import {PostReportServiceService} from './post-report/post-report-service.service';
 
 @Component({
   selector: 'app-add-new-car',
@@ -23,30 +24,33 @@ export class AddNewCarComponent implements OnInit {
   selectedEquipment = [];
   selectedFile: File = null;
   newCarForm: FormGroup;
-  postComplete = true;
-  postError = false;
-
+  isOpenReport: boolean = false;
+  errorOccured = false;
+  message = 'Error';
   private tempEquipment = null;
 
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private postReportService: PostReportServiceService) {
   }
 
   ngOnInit(): void {
     this.createForm();
+    this.postReportService.pushValue(this.isOpenReport);
+    this.postReportService.isOpenReport.subscribe( d => {
+      this.isOpenReport = d;
+    });
   }
 
   createForm() {
     this.newCarForm = new FormGroup({
-      _id: new FormControl(1),
-      brand: new FormControl(null),
-      model: new FormControl(null),
-      price: new FormControl(null),
-      mileage: new FormControl(null),
-      capacity: new FormControl(null),
-      horsepower: new FormControl(null),
-      acceleration: new FormControl(null),
-      year: new FormControl(null),
+      brand: new FormControl(null, Validators.required),
+      model: new FormControl(null, Validators.required),
+      price: new FormControl(null, Validators.required),
+      mileage: new FormControl(null, Validators.required),
+      capacity: new FormControl(null, Validators.required),
+      horsepower: new FormControl(null, Validators.required),
+      acceleration: new FormControl(null, Validators.required),
+      year: new FormControl(null, Validators.required),
       manual: new FormControl(false),
       multifunction: new FormControl(false),
       ventilatedSeats: new FormControl(false),
@@ -56,7 +60,7 @@ export class AddNewCarComponent implements OnInit {
       sunroof: new FormControl(false),
       bixenons: new FormControl(false),
       xenon: new FormControl(false),
-      image: new FormControl(null)
+      image: new FormControl(null, Validators.required)
     });
   }
 
@@ -114,10 +118,16 @@ export class AddNewCarComponent implements OnInit {
       uploadData
       ).subscribe(
         data => {},
-      err => {},
+      err => {
+        this.message = err.message;
+        this.postReportService.pushValue(!this.isOpenReport);
+        this.errorOccured = true;
+      },
       () => {
-        this.postComplete = true;
+        this.message = 'Success!';
+        this.postReportService.pushValue(!this.isOpenReport);
         this.clearForm();
+        this.errorOccured = false;
       }
     );
   }

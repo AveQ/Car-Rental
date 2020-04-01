@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {PostReportServiceService} from './post-report-service.service';
 
 @Component({
   selector: 'app-post-report',
@@ -6,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-report.component.scss']
 })
 export class PostReportComponent implements OnInit {
-  errorOccured = true;
-  message = 'Unknown error';
-  constructor() { }
+  @Input() errorOccured = true;
+  @Input() message;
+  constructor(private reportService: PostReportServiceService) { }
 
   ngOnInit(): void {
+  }
+  closeComponent() {
+    this.reportService.pushValue(false);
   }
 
 }

@@ -1,8 +1,9 @@
-<div class="background-report">
-  <div class="container-report">
-    <h1 *ngIf = "errorOccured">{{errorOccured? 'Error!' : 'Success!'}}</h1>
-    <p *ngIf = "errorOccured"> {{errorOccured? message : 'You add new vehicle!'}} </p>
-    <button class = "btn btn-outline-dark btn-report">{{errorOccured? 'Accept' : 'OK'}}</button>
+<div class="background-report" >
+  <div class="container-report col-10 col-md-8 col-lg-5">
+    <h1>{{errorOccured? 'Error!' : 'Success!'}}</h1>
+    <hr [ngClass] = "errorOccured? 'underline-report--error' : 'underline-report--success'">
+    <p> {{errorOccured? message : 'You added new vehicle!'}} </p>
 
+    <button [ngClass] = "errorOccured? 'btn-outline-danger' : 'btn-outline-success'" class = "btn btn-report" (click) = "closeComponent()">{{errorOccured? 'Accept' : 'OK'}}</button>
   </div>
 </div>
