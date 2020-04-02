@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DarkModeService } from 'src/app/darkMode.service';
+import { DarkModeService } from 'src/app/services/darkMode.service';
 
 @Component({
   selector: 'app-about-us',

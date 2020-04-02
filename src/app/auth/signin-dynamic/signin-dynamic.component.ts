@@ -1,6 +1,9 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { SigninDynamicService } from './signinDynamic.service';
+import {AuthResponseData, SigninDynamicService} from '../../services/signinDynamic.service';
+import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
+
 
 
 @Component({
@@ -16,10 +19,15 @@ export class SigninDynamicComponent implements OnInit {
   dataInvalid: boolean = false;
   signup: boolean = false;
 
-  constructor(private ele: ElementRef, private ren: Renderer2, private siginSer: SigninDynamicService) { }
+  constructor(
+    private ele: ElementRef,
+    private ren: Renderer2,
+    private siginSer: SigninDynamicService,
+    private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.signinForm = new FormGroup (
+    this.signinForm = new FormGroup(
       {
         email: new FormControl(null, [Validators.required, Validators.email]),
         password: new FormControl(null, Validators.required)
@@ -28,6 +36,20 @@ export class SigninDynamicComponent implements OnInit {
     }
   onSubmit() {
     console.log(this.signinForm);
+    let authObs: Observable<AuthResponseData>;
+    if (this.signup) {
+      authObs = this.siginSer.signup(this.signinForm.value);
+    } else {
+      authObs = this.siginSer.login(this.signinForm.value);
+    }
+    // subscribe part
+    authObs.subscribe(
+      resData => {
+        this.router.navigate(['/']);
+      },
+      error => {},
+      () => {}
+    );
   }
   onFocus(name: string) {
     if ((name === 'password' && this.focusonPassword === true ) ||
@@ -48,5 +70,4 @@ export class SigninDynamicComponent implements OnInit {
   closeComponent() {
     this.siginSer.pushValue(false);
   }
-
 }

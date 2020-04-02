@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+
+    <div *ngFor = "let user of users; let i = index" class="col-11 col-lg-8 card userCard">
+      <div class="row text-center">
+        <div class="col-12 userData ">
+          <h2 class="userName">Name: {{user.email}}</h2>
+        </div>
+        <div class="col-12 userData ">
+          <h5 class="userId">Role: User</h5>
+        </div>
+        <div class="col-12 userData ">
+          <h5 class="userId">ID: {{user._id}}</h5>
+        </div>
+        <div class="col-12 userData ">
+          <div class="btn btn-danger btnUser">DELETE</div>
+          <div (click)="openHistory(history)" class="btn btn-outline-success btnUser">History</div>
+          <div class="btn btn-dark btnUser">Add admin role</div>
+        </div>
+      </div>
+      <div #history  class="row userHistory">
+        <div class="col-12">
+          <ul>
+            <li>2019-04-21 -- 2019-04-21 -> BMW M4</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-8">
+      <div routerLink="/admin-panel" class="mr-1 btn btn-dark">Back</div>
+      <div routerLink="/" class="ml-1 btn btn-dark">Home</div>
+    </div>
+
+  </div>
+</div>

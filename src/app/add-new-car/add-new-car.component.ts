@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
-import {PostReportServiceService} from './post-report/post-report-service.service';
+import {PostReportServiceService} from '../services/post-report-service.service';
 
 @Component({
   selector: 'app-add-new-car',

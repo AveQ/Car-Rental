@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, ElementRef, Renderer2} from '@angular/core';
-import {FindVehicleService} from './find-vehicle.service';
+import {FindVehicleService} from '../services/find-vehicle.service';
 import {Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 

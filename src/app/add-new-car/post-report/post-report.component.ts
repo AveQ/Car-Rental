@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PostReportServiceService} from './post-report-service.service';
+import {PostReportServiceService} from '../../services/post-report-service.service';
 
 @Component({
   selector: 'app-post-report',

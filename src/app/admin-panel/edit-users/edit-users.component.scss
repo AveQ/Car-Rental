@@ -1,0 +1,29 @@
+.userCard {
+  margin: 10px;
+}
+.userData {
+  padding: 5px;
+}
+.btn-group {
+  margin: 0 auto;
+}
+.btnUser {
+  margin: 0 6px;
+}
+.userHistory {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 500ms linear;
+}
+.userHistory--open {
+  max-height: 200px;
+}
+@media (max-width: 600px) {
+  .userId, .userName {
+    font-size: 15px;
+  }
+  .btnUser {
+    font-size: 12px;
+    padding:5px;
+  }
+}
