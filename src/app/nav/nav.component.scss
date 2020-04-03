@@ -59,8 +59,12 @@ nav {
 .nav-brand-textTwo, .nav-brand-textOne {
     color: black;
 }
+// logging button
 
-// language 
+.logging {
+  cursor: pointer;
+}
+// language
 .nav-select-language{
     right: 20px;
     text-align: center;
@@ -108,7 +112,7 @@ nav {
         transform: scale(1.05);
     }
 }
-// main menu list 
+// main menu list
 .nav-menu{
     font-family: 'Montserrat', sans-serif;
     position: absolute;
@@ -135,7 +139,7 @@ nav {
 .nav-element {
     list-style-type: none;
     text-align: center;
-    line-height: 50px;  
+    line-height: 50px;
     letter-spacing: 3px;
     &:hover span{
         animation: menuspacing 400ms linear forwards;
@@ -158,9 +162,9 @@ nav {
     position: relative;
 }
 .nav-link--darkmode {///////////////
-    
+
     border-bottom: 1px solid rgb(104, 103, 103);
-    
+
 }
 .nav-menu-image{
     position: absolute;
@@ -223,7 +227,7 @@ nav {
 
 @media(max-width: 600px) {
     .nav-select-language{
-        right: 5px; 
+        right: 5px;
     }
     .nav-language-fullname {
         display: none;
@@ -232,7 +236,7 @@ nav {
 
 @media(max-width: 500px) {
     .nav-select-language{
-        right: 1px; 
+        right: 1px;
     }
     .nav-brand {
         font-size: 10px;

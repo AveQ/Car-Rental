@@ -26,6 +26,7 @@ import { PostReportComponent } from './add-new-car/post-report/post-report.compo
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AccountComponent } from './account/account.component';
 import { EditUsersComponent } from './admin-panel/edit-users/edit-users.component';
+import {SigninDynamicService} from './services/signinDynamic.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomepageComponent},
@@ -72,7 +73,7 @@ const appRoutes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: FindVehicleInterceptorService,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

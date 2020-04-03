@@ -1,14 +1,28 @@
-import {HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {SigninDynamicService} from './signinDynamic.service';
+import {Injectable} from '@angular/core';
+import {exhaustMap, take} from 'rxjs/operators';
 
+@Injectable()
 export class FindVehicleInterceptorService implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const modifedRequest = req.clone(
-      {
-        headers:
-          req.headers.append('Access-Control-Allow-Methods', '*')
-      });
+  constructor(private authService: SigninDynamicService) {
+  }
 
-    return next.handle(modifedRequest);
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    return this.authService.user.pipe(take(1), exhaustMap(user => {
+      if (!user) {
+        return next.handle(req);
+      } else {
+        const modifiedReq = req.clone({
+            headers: new HttpHeaders({
+              'Authorization':  "Barer " + user.myToken,
+              'Admin': '' + user.isAdmin
+            })
+          }
+        );
+        return next.handle(modifiedReq);
+      }
+    }));
   }
 }
 

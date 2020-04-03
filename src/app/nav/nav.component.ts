@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { DarkModeService } from '../services/darkMode.service';
-import { SigninDynamicService } from '../services/signinDynamic.service';
+import {DarkModeService} from '../services/darkMode.service';
+import {SigninDynamicService} from '../services/signinDynamic.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -14,9 +14,12 @@ export class NavComponent implements OnInit, OnDestroy {
   private isLanguageMenuOpen = false;
   private isMainmenuOpen = false;
   private isSigninPanelOpen = false;
+  private isAdministrator = false;
   nameOfUser = 'GUEST';
   typeOfUser = 'GUEST';
-  constructor(private modeService: DarkModeService, private signService: SigninDynamicService) { }
+
+  constructor(private modeService: DarkModeService, private signService: SigninDynamicService) {
+  }
 
   ngOnInit(): void {
     this.signService.subject.subscribe(value => {
@@ -27,22 +30,29 @@ export class NavComponent implements OnInit, OnDestroy {
       this.isSigninPanelOpen = false;
       this.isMainmenuOpen = false;
       this.nameOfUser = user ? user.email.split('@')[0].toUpperCase() : 'GUEST';
-      this.typeOfUser = user ? 'USER' : 'GUEST';
+      this.typeOfUser = user ? user.isAdmin : 'GUEST';
+      if (user && user.isAdmin === 'ADMIN') {
+        this.isAdministrator = true;
+      } else {
+        this.isAdministrator = false;
+      }
     });
   }
-  openLanguageList() {
 
+  openLanguageList() {
     if (this.isLanguageMenuOpen === true) {
       return 'nav-languages--open';
     }
   }
+
   openMainMenu() {
     const obj = {
-      'nav-menu--open': this.isMainmenuOpen ? true : false,
-      'nav-menu--darkmode': this.modeService.isDarkMode ? true : false
+      'nav-menu--open': this.isMainmenuOpen,
+      'nav-menu--darkmode': this.modeService.isDarkMode
     };
     return obj;
   }
+
   signStatus() {
     if (!this.isAuthenticated) {
       this.isSigninPanelOpen = !this.isSigninPanelOpen;
@@ -50,24 +60,35 @@ export class NavComponent implements OnInit, OnDestroy {
       this.isSigninPanelOpen = false;
     }
   }
+
   languageStatus() {
     this.isLanguageMenuOpen = !this.isLanguageMenuOpen;
   }
+
   menuStatus() {
     this.isMainmenuOpen = !this.isMainmenuOpen;
   }
+
   changeMode(value: string) {
     return this.modeService.changeMode(value);
   }
+
   otherMode(value) {
     this.modeService.otherMode(value);
   }
+
   isSigninTrue() {
     return this.isSigninPanelOpen;
   }
+
   logout() {
     this.signService.logout();
   }
+
+  isUserAnAdmin() {
+    return (this.isAdministrator && this.isAuthenticated);
+  }
+
   ngOnDestroy(): void {
     this.signService.subject.unsubscribe();
     this.userSub.unsubscribe();

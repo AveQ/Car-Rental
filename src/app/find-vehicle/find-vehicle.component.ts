@@ -2,6 +2,8 @@ import {Component, OnInit, OnDestroy, ElementRef, Renderer2} from '@angular/core
 import {FindVehicleService} from '../services/find-vehicle.service';
 import {Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {SigninDynamicService} from '../services/signinDynamic.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-find-vehicle',
@@ -9,7 +11,8 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./find-vehicle.component.scss']
 })
 export class FindVehicleComponent implements OnInit, OnDestroy {
-
+  private userSub: Subscription;
+  private isAdministrator = false;
   checkDate = false;
   editCar = false;
   filters = false;
@@ -26,7 +29,7 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
   mySubscribe: Subscription;
   editingCar;
 
-  constructor(private render: Renderer2, private http: HttpClient, private findVehicleService: FindVehicleService) {
+  constructor(private render: Renderer2, private http: HttpClient, private findVehicleService: FindVehicleService, private signService: SigninDynamicService) {
   }
 
   ngOnInit(): void {
@@ -34,7 +37,13 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
       this.checkDate = data;
     });
     this.getAllVehicles();
-
+    this.userSub = this.signService.user.pipe(take(1)).subscribe(user => {
+      if (user && user.isAdmin === 'ADMIN') {
+        this.isAdministrator = true;
+      } else {
+        this.isAdministrator = false;
+      }
+    });
 
   }
 
@@ -165,7 +174,9 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  isUserAnAdmin() {
+    return this.isAdministrator;
+  }
   deleteVehicle(id) {
     this.http.delete(('http://localhost:3001/vehicles/' + id)).subscribe(data => {
       },

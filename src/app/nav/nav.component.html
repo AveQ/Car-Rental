@@ -106,8 +106,8 @@
       <!--                </a>-->
       <!--            </li>-->
       <li class="nav-element nav-element-account" (click)="signStatus()"><a class="nav-link" [ngClass]="changeMode('link')">
-        <small>{{typeOfUser}}</small>
-        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 172 172"
+        <small class="logging">{{typeOfUser}}</small>
+        <svg class="logging" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 172 172"
              style=" fill:#000000;">
           <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
              stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
@@ -121,7 +121,7 @@
             </g>
           </g>
         </svg>
-        <small>{{nameOfUser}}</small>
+        <small class="logging">{{nameOfUser}}</small>
       </a></li>
       <li *ngIf="isAuthenticated" class="nav-element">
         <a routerLink="/account" class="nav-link" [ngClass]="changeMode('link')">
@@ -129,7 +129,7 @@
           <img class="nav-menu-image" src="https://img.icons8.com/cotton/40/000000/settings--v1.png"/>
         </a>
       </li>
-      <li *ngIf="isAuthenticated" class="nav-element">
+      <li *ngIf="isUserAnAdmin()" class="nav-element">
         <a routerLink='/admin-panel' class="nav-link" [ngClass]="changeMode('link')">
           <span>Admin panel</span>
           <img class="nav-menu-image" src="https://img.icons8.com/cotton/40/000000/settings--v1.png"/>

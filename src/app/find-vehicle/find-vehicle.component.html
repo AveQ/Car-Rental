@@ -186,7 +186,7 @@
                 <li class="addit-info-car" *ngIf = 'editMode'> <button (click) = "patchVehicle(carList[i]._id, 'bixenons', !carList[i].bixenons)" class="btn btn-outline-danger btn-change">Change</button></li>
             </ul>
         </div>
-        <div class="col-12 text-right">
+        <div *ngIf = "isUserAnAdmin()" class="col-12 text-right">
             <button class="btn btn-secondary mb-2" (click) = "editThisCar()">Edit</button>
         </div>
         <div *ngIf = 'editMode' class="col-12 text-center">
