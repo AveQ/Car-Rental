@@ -22,6 +22,25 @@ export class SigninDynamicService {
 
     constructor(private http: HttpClient) {this.subject = new Subject<boolean>(); }
 
+    autoLogin() {
+      const userData: {
+        id: string,
+        email: string,
+        token: string,
+        tokenExpirationDate: string,
+        isAdmin: string,
+        historyId: string
+      } = JSON.parse(localStorage.getItem('userData'));
+      if (!userData) {
+        return;
+      }
+      const loadedUser = new User(userData.id, userData.email, userData.token,
+        new Date(userData.tokenExpirationDate), userData.isAdmin, userData.historyId);
+
+      if (loadedUser.myToken) {
+        this.user.next(loadedUser);
+      }
+    }
     pushValue(value: boolean) {
         this.subject.next(value);
     }
@@ -37,12 +56,14 @@ export class SigninDynamicService {
     }
     logout() {
       this.user.next(null);
+      localStorage.clear();
     }
     private handleAuthentication(id, email, token, expirationDate, isAdmin, historyId) {
       const expDate = new Date(new Date().getTime() + +expirationDate * 1000); // one hour expiration
       const user = new User(id, email, token, expDate, isAdmin, historyId);
       console.log(user);
       this.user.next(user);
+      localStorage.setItem('userData', JSON.stringify(user));
     }
 
 }

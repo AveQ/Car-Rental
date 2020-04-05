@@ -7,27 +7,28 @@ import {filter, map} from 'rxjs/operators';
     providedIn: 'root'
 })
 export class FindVehicleService {
-    isOpenCheckComponent: Subject<boolean> = new Subject<false>();
-    private carBrand: string;
-    private carList = [];
-    carObserw$: Observable<object>;
 
     constructor(private http: HttpClient) {}
 
-    pushValue(value: boolean) {
-        this.isOpenCheckComponent.next(value);
+    getAllVehicles(page, limit) {
+      return this.http.get('http://localhost:3001/vehicles?page=' + page + '&limit=' + limit);
     }
-    setBrand(value: string) {
-        this.carBrand = value;
-    }
-    getBrand() {
-      return this.carBrand;
-    }
-    getAllVehicles() {
-      return this.http.get('http://localhost:3001/vehicles');
+    getOneVehicle(id) {
+      return this.http.get('http://localhost:3001/vehicles/' + id);
     }
     patchVehicle(id, toChange, newValue) {
       return this.http.patch(('http://localhost:3001/vehicles/' + id), [{ "propName": toChange, "value": newValue}]);
     }
 
+  orderVehicles(data, order, type) {
+    order = order.replace(' ', '').toLowerCase();
+    console.log(order);
+    const test = data.sort((a, b) => {
+      if (type === 'asc') {
+        return ((a[order] > b[order]) ? 1 : (a[order] < b[order]) ? -1 : 0);
+      } else {
+        return ((a[order] < b[order] ? 1 : (a[order] > b[order]) ? -1 : 0));
+      }
+    });
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FindVehicleService } from '../../services/find-vehicle.service';
+import {CheckDateService} from './check-date-service.service';
 
 @Component({
   selector: 'app-check-date',
@@ -8,35 +8,22 @@ import { FindVehicleService } from '../../services/find-vehicle.service';
   styleUrls: ['./check-date.component.scss']
 })
 export class CheckDateComponent implements OnInit {
-
+  carToRent;
+  carBrand: string;
   today: Date = new Date();
   dateForm: FormGroup;
   date: string ;
-  carBrand: string;
   response: boolean = false;
   available: boolean = false;
 
-  constructor(private findVehicleService: FindVehicleService) { }
+  constructor( private dateService: CheckDateService) { }
 
   ngOnInit(): void {
-    this.carBrand = this.findVehicleService.getBrand();
     this.createDay();
     this.createForm();
+    this.carToRent = this.dateService.getCar();
+    this.carBrand = this.carToRent.brand;
 
-      console.log(new Date('2020-04-09'));
-
-    // // wypozyczony w
-    // let date1 = new Date(2019, 3, 24);
-    // let date2 = new Date(2019, 3, 28);
-    // // chce wypozyczyc
-    // let date3 = new Date(2019, 3, 25);
-    // let date4 = new Date(2019, 3, 26);
-    // if ((date4 < date1 && date4 < date1) || (date2 < date3 && date2 < date4)) {
-    //   console.log('yes');
-    // } else {
-    //   console.log('no');
-    // }
-    // // console.log(date1);
   }
   createDay() {
     let month;
@@ -53,11 +40,11 @@ export class CheckDateComponent implements OnInit {
       days: new FormControl(null, [Validators.required, Validators.max(14)]),
     });
   }
-
+  closeComponent() {
+    this.dateService.checkComp.next(false);
+  }
   onSubmit() {
     console.log(this.dateForm);
-  }
-  closeComponent() {
-    this.findVehicleService.pushValue(false);
+    this.dateService.createRentalDate(this.dateForm.value);
   }
 }

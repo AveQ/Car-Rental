@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {SigninDynamicService} from '../services/signinDynamic.service';
 import {take} from 'rxjs/operators';
+import {CheckDateService} from './check-date/check-date-service.service';
 
 @Component({
   selector: 'app-find-vehicle',
@@ -13,29 +14,44 @@ import {take} from 'rxjs/operators';
 export class FindVehicleComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
   private isAdministrator = false;
-  checkDate = false;
+  page = 1;
+  limit = 2;
+  canBeNext = false;
+  canBePrevious = false;
+  isCheckDate = false;
   editCar = false;
   filters = false;
   editMode = false;
   adres = 'http://localhost:3001/';
   tempArray = [];
   carList = [];
-  carName = [];
+  isSignIn = false;
+  carToRent;
 
-  carModel = [];
+  order = [
+    'brand',
+    'model',
+    'year',
+    'price',
+    'capacity',
+    'horse Power'
+  ];
+  currentOrder = 'none';
+  typeList = [
+    'asc',
+    'desc'
+  ];
+  currentType = 'asc';
 
-  years = [];
-
-  mySubscribe: Subscription;
-  editingCar;
-
-  constructor(private render: Renderer2, private http: HttpClient, private findVehicleService: FindVehicleService, private signService: SigninDynamicService) {
+  constructor(
+    private checkDateService: CheckDateService,
+    private render: Renderer2, private http: HttpClient,
+    private findVehicleService: FindVehicleService,
+    private signService: SigninDynamicService) {
   }
 
   ngOnInit(): void {
-    this.mySubscribe = this.findVehicleService.isOpenCheckComponent.subscribe(data => {
-      this.checkDate = data;
-    });
+    this.initCheckComp();
     this.getAllVehicles();
     this.userSub = this.signService.user.pipe(take(1)).subscribe(user => {
       if (user && user.isAdmin === 'ADMIN') {
@@ -43,30 +59,17 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
       } else {
         this.isAdministrator = false;
       }
+      this.isSignIn = !!user;
     });
-
   }
 
-  markBrand(info) {
-    console.log(info);
-    switch (info) {
-      case 'bmw': {
-        this.carModel = this.carName[0].list;
-        break;
+  initCheckComp() {
+    this.checkDateService.checkComp.next(false);
+    this.checkDateService.checkComp.subscribe(
+      sub => {
+        this.isCheckDate = sub;
       }
-      case 'audi': {
-        this.carModel = this.carName[1].list;
-        break;
-      }
-      case 'mercedes': {
-        this.carModel = this.carName[2].list;
-        break;
-      }
-      case 'lambo': {
-        this.carModel = this.carName[3].list;
-        break;
-      }
-    }
+    );
   }
 
   addToCompare(car) {
@@ -80,13 +83,17 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
   }
 
   openCheckComponent(object) {
-    console.log(name);
-    this.findVehicleService.pushValue(!this.checkDate);
-    this.findVehicleService.setBrand(this.carList[object].brand);
+    this.checkDateService.checkComp.next(true);
+    this.checkDateService.setCar(object);
   }
 
+  changeType(value) {
+    this.currentType = value.value;
+  }
+  changeOrder(value) {
+    this.currentOrder = value.value;
+  }
   ngOnDestroy(): void {
-    this.mySubscribe.unsubscribe();
   }
 
   openCarInformation(value: HTMLElement) {
@@ -100,34 +107,48 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
   editThisCar() {
     this.editMode = !this.editMode;
   }
-
-  changeCarValues(car, value, name) {
-    // car[name] = value+'';
-    console.log(car[name]);
+  orderResult() {
+    if (this.carList.length > 0) {
+      this.findVehicleService.orderVehicles(this.carList, this.currentOrder, this.currentType);
+    }
   }
-
-  test(car) {
-    this.editingCar = car;
-    console.log(this.editingCar);
+  nextPage() {
+    if ( this.canBeNext ) {
+      this.page++;
+      this.getAllVehicles();
+    }
   }
-
-  test2(car, value, name) {
-    console.log(car[name]);
+  previousPage() {
+    if ( this.canBePrevious ) {
+      this.page--;
+      this.getAllVehicles();
+    }
   }
-
   getAllVehicles() {
-    this.findVehicleService.getAllVehicles().subscribe(
+    this.canBeNext = false;
+    this.canBePrevious = false;
+    this.findVehicleService.getAllVehicles(this.page, this.limit).subscribe(
       data => {
-        let tempList = [];
+        const tempList = [];
         for (const element in data) {
           if (data.hasOwnProperty(element)) {
-            Object.keys(data[element]).forEach(key => {
-              if (key === 'image') {
-                const img = data[element];
-                img[key] = this.adres + img[key];
+            if ( element === 'next') {
+              this.canBeNext = true;
+            } else if ( element === 'previous' ) {
+              this.canBePrevious = true;
+            } else { // take car objects and push them to carList
+              for (const car in data[element]) {
+                if (data.hasOwnProperty(element)) {
+                  Object.keys(data[element][car]).forEach(key => {
+                    if (key === 'image') {
+                      const img = data[element][car];
+                      img[key] = this.adres + img[key];
+                    }
+                  });
+                  tempList.push(data[element][car]);
+                }
               }
-            });
-            tempList.push(data[element]);
+            }
           }
         }
         this.carList = tempList;
@@ -135,6 +156,7 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
       err => {
       },
       () => {
+        this.orderResult();
       }
     );
   }

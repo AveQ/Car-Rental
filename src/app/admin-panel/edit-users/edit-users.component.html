@@ -7,22 +7,26 @@
           <h2 class="userName">Name: {{user.email}}</h2>
         </div>
         <div class="col-12 userData ">
-          <h5 class="userId">Role: User</h5>
+          <h5 class="userId">Role: {{user.isAdmin}}</h5>
         </div>
         <div class="col-12 userData ">
           <h5 class="userId">ID: {{user._id}}</h5>
         </div>
         <div class="col-12 userData ">
           <div class="btn btn-danger btnUser">DELETE</div>
-          <div (click)="openHistory(history)" class="btn btn-outline-success btnUser">History</div>
-          <div class="btn btn-dark btnUser">Add admin role</div>
+          <div (click)="openHistory(history, user.historyId)" class="btn btn-outline-success btnUser">History</div>
         </div>
       </div>
       <div #history  class="row userHistory">
         <div class="col-12">
-          <ul>
-            <li>2019-04-21 -- 2019-04-21 -> BMW M4</li>
-          </ul>
+          <hr>
+<!--          _id: "5e889338bf91fb2d58d1e78a", userId: "5e86e542e204f83930807a9e", userEmail: "test@test.com", vehicleId: "5e871db5b4fc6533b89a7256", vehicleName:-->
+          <div *ngFor="let elem of user.history" class="text-center">
+            <h5>Car: {{elem.vehicleName}}</h5>
+            <h5>from: {{elem.from | date}} to: {{elem.to | date}}</h5>
+            <small>id: {{elem._id}}</small>
+          </div>
+          <div class="text-center m-2">User  doesn't have more history</div>
         </div>
       </div>
     </div>

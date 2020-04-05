@@ -4,11 +4,11 @@
         <h5 class="pb-2">Your {{carBrand}}</h5>
         <div class="form-group">
             <label #emailLabel for="dateStart" class="form__label">Date of rent</label>
-            <input type="date" min={{date}} class="form-control" id="start" formControlName="trip_start">
+            <input type="date" min={{date}} class="form-control" id="dateStart" formControlName="trip_start">
         </div>
         <div class="form-group">
             <label #emailLabel for="dateEnd" class="form__label">Rental days</label>
-            <input type="number" id="start" name="days" class="form-control" formControlName="days" max='14' min='1'>
+            <input type="number" id="dateEnd" name="days" class="form-control" formControlName="days" max='14' min='1'>
         </div>
         <p *ngIf="!dateForm.get('days').valid && dateForm.get('days').touched" class="card bg-danger"
             style="color: white;">Number should be between 1-14</p>

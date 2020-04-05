@@ -1,5 +1,6 @@
 .userCard {
   margin: 10px;
+
 }
 .userData {
   padding: 5px;
@@ -13,10 +14,11 @@
 .userHistory {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 500ms linear;
+  transition: all 500ms linear;
 }
 .userHistory--open {
-  max-height: 200px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 @media (max-width: 600px) {
   .userId, .userName {
