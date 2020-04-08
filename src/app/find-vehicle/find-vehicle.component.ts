@@ -5,6 +5,8 @@ import {HttpClient} from '@angular/common/http';
 import {SigninDynamicService} from '../services/signinDynamic.service';
 import {take} from 'rxjs/operators';
 import {CheckDateService} from './check-date/check-date-service.service';
+import {CarComparisonService} from '../services/carComparison.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-find-vehicle',
@@ -23,11 +25,9 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
   filters = false;
   editMode = false;
   adres = 'http://localhost:3001/';
-  tempArray = [];
   carList = [];
   isSignIn = false;
-  carToRent;
-
+  carsToComparison = [];
   order = [
     'brand',
     'model',
@@ -45,9 +45,12 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
 
   constructor(
     private checkDateService: CheckDateService,
-    private render: Renderer2, private http: HttpClient,
+    private render: Renderer2,
+    private http: HttpClient,
+    private router: Router,
     private findVehicleService: FindVehicleService,
-    private signService: SigninDynamicService) {
+    private signService: SigninDynamicService,
+    private comparisonService: CarComparisonService) {
   }
 
   ngOnInit(): void {
@@ -73,29 +76,35 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
   }
 
   addToCompare(car) {
-    const newId = car.id;
-    const index = this.carList.findIndex(ind => ind.id === newId);
-    this.carList[index].compare = !this.carList[index].compare;
+    this.comparisonService.addCar(car);
+
   }
 
   comparison() {
-    this.tempArray = this.carList.filter(ind => ind.compare === true);
+    if ( this.comparisonService.getCarArray().length > 0 ) {
+      this.router.navigateByUrl('/comparison');
+    }
+    // this.tempArray = this.carList.filter(ind => ind.compare === true);
   }
 
   openCheckComponent(object) {
     this.checkDateService.checkComp.next(true);
     this.checkDateService.setCar(object);
   }
-
   changeType(value) {
     this.currentType = value.value;
   }
   changeOrder(value) {
     this.currentOrder = value.value;
   }
-  ngOnDestroy(): void {
+  isCarAddToComp(car) {
+    const index = this.comparisonService.getCarArray().findIndex((car1) => car1._id === car._id);
+    if ( index === -1 ) {
+      return false;
+    } else {
+      return true;
+    }
   }
-
   openCarInformation(value: HTMLElement) {
     if (value.classList.value === 'row info-container info-container--open') {
       value.classList.remove('info-container--open');
@@ -103,7 +112,6 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
       value.classList.add('info-container--open');
     }
   }
-
   editThisCar() {
     this.editMode = !this.editMode;
   }
@@ -160,9 +168,8 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
       }
     );
   }
-
   patchTextValue(id, newValue, elementName) {
-    const text = newValue.value.replace(/\s/g, "");
+    const text = newValue.value.replace(/\s/g, '');
     if (text.length >= 2) {
       this.findVehicleService.patchVehicle(id, elementName, text).subscribe(
         data => {
@@ -179,7 +186,6 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
       );
     }
   }
-
   patchVehicle(id, toChange, newValue) {
 
     this.findVehicleService.patchVehicle(id, toChange, newValue).subscribe(
@@ -208,6 +214,8 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
         this.getAllVehicles();
       }
     );
+  }
+  ngOnDestroy(): void {
   }
 }
 

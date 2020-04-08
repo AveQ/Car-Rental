@@ -1,17 +1,13 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12 containerForTable">
-            <table class="table myTable">
-                <!-- 
-                    Kind
-                -->
-                <thead class="thead-dark">
-                    <tr>
-                        <th class="element" colspan="10">Basic Information</th>
-                        <th class="element" colspan="8">Equipment</th>
-                    </tr>
-                </thead>
-                <!-- 
+<div class="container-fluid">
+  <h1 class="text-center mt-4 header">Comparison</h1>
+    <div class="row justify-content-center">
+
+      <div class="col-12">
+        <h3 class="text-center mt-3 header">Main info</h3>
+      </div>
+        <div class="col-11 containerForTable">
+            <table class=" table myTable">
+                <!--
                     Names
                 -->
                 <thead class="thead-dark">
@@ -25,28 +21,52 @@
                         <th class="element">Horsepower</th>
                         <th class="element">Acceleration</th>
                         <th class="element">Year</th>
-                        <th class="element">Manual</th>
-                        <th class="element">Multifunction</th>
-                        <th class="element">Ventilated Seats</th>
-                        <th class="element">Heated Seats</th>
-                        <th class="element">Navigation</th>
-                        <th class="element">Air Conditioning</th>
-                        <th class="element">Sunroof</th>
-                        <th class="element">Bi-xenons</th>
-                        <th class="element">Xenon</th>
                     </tr>
                 </thead>
-                <!-- 
+                <!--
                     objects
                 -->
                 <tr *ngFor = "let object of arrayWithObjects; let i = index">
                     <th class="element">{{i+1}}</th>
-                    <ng-container *ngFor = "let value of object | keyvalue">
-                        <th class="element" *ngIf = "i < 18">{{value.value}}</th>
+                    <ng-container *ngFor = "let value of object | keyvalue: asIsOrder; let j = index">
+                        <th class="element" *ngIf="without(value.key) && j < 9">{{value.value}}</th>
                     </ng-container>
                 </tr>
             </table>
         </div>
+      <h3 class="text-center mt-2">Equipment</h3>
+      <div class="col-11 containerForTable">
+        <table class="table myTable">
+          <!--
+              Names
+          -->
+          <thead class="thead-dark">
+          <tr>
+            <th class="element">#</th>
+            <th class="element">Brand</th>
+            <th class="element">Manual</th>
+            <th class="element">Multifunction</th>
+            <th class="element">Ventilated Seats</th>
+            <th class="element">Heated Seats</th>
+            <th class="element">Navigation</th>
+            <th class="element">Air Conditioning</th>
+            <th class="element">Sunroof</th>
+            <th class="element">Bi-xenons</th>
+            <th class="element">Xenon</th>
+          </tr>
+          </thead>
+          <!--
+              objects
+          -->
+          <tr *ngFor = "let object of arrayWithObjects; let i = index">
+            <th class="element">{{i+1}}</th>
+            <ng-container *ngFor = "let value of object | keyvalue: asIsOrder; let j = index">
+              <th class="element" *ngIf="j == 1">{{value.value}}</th>
+              <th class="element" *ngIf="without(value.key) && j > 8">{{value.value}}</th>
+            </ng-container>
+          </tr>
+        </table>
+      </div>
         <!--
             back to vehicles or gener. pdf
         -->

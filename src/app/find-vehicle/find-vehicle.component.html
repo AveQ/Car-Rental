@@ -7,7 +7,7 @@
     </div>
     <div class="col-lg-4 col-sm-12 text-lg-right text-sm-center">
       <button class="btn btn-outline-dark m-3" (click)='filters = !filters;'>Filters</button>
-      <button routerLink='/comparison' class="btn btn-outline-dark m-3" (click)='comparison()'>Comparison</button>
+      <button class="btn btn-outline-dark m-3" (click)='comparison()'>Comparison</button>
     </div>
   </div>
   <div [ngClass]="{'filters--open': filters === true}" class="row  border pt-3 filters">
@@ -48,9 +48,8 @@
     </div>
 
     <div class="col-7 car__info">
-      <!-- ttttttttttttttttttttttt -->
       <div class="compare">
-        <div *ngIf="carList[i].compare" class="check check--compare"></div>
+        <div *ngIf="isCarAddToComp(carList[i])" class="check check--compare"></div>
       </div>
       <h3 class="car__title">{{carList[i].brand}} {{carList[i].model}}</h3>
 
@@ -90,7 +89,7 @@
         </small>
       </div>
       <div class="car__btn">
-        <button class="btn btn-outline-dark btn--inforent" (click)="addToCompare(carList[i])">Compare</button>
+        <button class="btn btn-outline-dark btn--inforent" (click)="addToCompare(carList[i])">{{!isCarAddToComp(carList[i]) ? 'Compare' : 'Back Compare' }}</button>
         <button *ngIf="isSignIn" class="btn btn-outline-dark ml-1 btn--inforent"
                 (click)="openCheckComponent(carList[i])">Rent
         </button>

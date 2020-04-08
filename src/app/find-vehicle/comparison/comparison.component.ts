@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CarComparisonService} from '../../services/carComparison.service';
 
 @Component({
   selector: 'app-comparison',
@@ -12,9 +13,24 @@ export class ComparisonComponent implements OnInit {
     {r: 3}
   ];
 
-  constructor() { }
+  constructor(
+    private comparisonService: CarComparisonService
+  ) { }
 
   ngOnInit(): void {
+    this.arrayWithObjects = this.comparisonService.getCarArray();
+    console.log(this.arrayWithObjects[0]);
   }
 
+  asIsOrder(a, b) {
+    return 1;
+  }
+
+  without(key) {
+    if ( (key === '_id' || key === 'historyId' || key === 'image')){
+      return 0;
+    } else {
+      return 1;
+    }
+  }
 }

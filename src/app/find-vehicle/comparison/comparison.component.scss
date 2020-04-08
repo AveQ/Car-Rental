@@ -1,16 +1,28 @@
 .containerForTable {
-    overflow-x: scroll;
+  overflow-x: auto;
+  padding: 0;
 }
+
+.contForHeader {
+  display: inline-block;
+}
+
+.header {
+  height: 100%;
+  display: block;
+}
+
 .myTable {
-    margin-top: 20px;
-    border: 1px solid black;
+  margin-top: 20px;
+  border: 1px solid black;
 }
+
 .element {
-    text-align: center;
-    white-space: nowrap;
-    background-color: rgb(241, 238, 238);
-    border-top: 1px solid black;
+  text-align: center;
+  white-space: nowrap;
+  border-top: 1px solid black;
 }
+
 .btn-group {
-    padding:20px;
+  padding: 20px;
 }
