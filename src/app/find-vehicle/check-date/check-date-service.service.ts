@@ -46,11 +46,14 @@ export class CheckDateService {
           let endReser;
           for (const element in data) {
             if (data.hasOwnProperty(element)) {
-              startReser = new Date(data[element].from);
-              endReser = new Date(data[element].to);
-              if (!this.dateCompare(startReser.getTime(), endReser.getTime())) {
-                return null;
-              }
+              console.log("test" + this.carToRent._id);
+              // if (data[element].vehicleId !== this.carToRent._id)
+                startReser = new Date(data[element].from);
+                endReser = new Date(data[element].to);
+                if (!this.dateCompare(startReser.getTime(), endReser.getTime()) && data[element].vehicleId === this.carToRent._id) {
+                  return null;
+                }
+
             }
           }
           this.setReservation();

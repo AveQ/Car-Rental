@@ -13,6 +13,9 @@ export class FindVehicleService {
     getAllVehicles(page, limit) {
       return this.http.get('http://localhost:3001/vehicles?page=' + page + '&limit=' + limit);
     }
+    getAllVehicleWithoutPag() {
+      return this.http.get('http://localhost:3001/vehicles/all');
+    }
     getOneVehicle(id) {
       return this.http.get('http://localhost:3001/vehicles/' + id);
     }

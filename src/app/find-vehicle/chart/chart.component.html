@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center mt-5 mb-5">
+      <h1>Statistics of the most popular cars</h1>
+    </div>
+    <div class="col-12">
+      <canvas baseChart class="myChart"
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              [colors] = "chartColors"
+      ></canvas>
+    </div>
+    <div class="col-12 text-center">
+      <ul class="list">
+        <li class="element">Number 1: {{cars[0]}} </li>
+        <li class="element">Number 2: {{cars[1]}}</li>
+        <li class="element">Number 3: {{cars[2]}}</li>
+        <li class="element">Number 4: {{cars[3]}}</li>
+        <li class="element">Number 5: {{cars[4]}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

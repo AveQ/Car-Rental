@@ -27,6 +27,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AccountComponent } from './account/account.component';
 import { EditUsersComponent } from './admin-panel/edit-users/edit-users.component';
 import {SigninDynamicService} from './services/signinDynamic.service';
+import {ChartsModule} from 'ng2-charts';
+import {ChartComponent} from './find-vehicle/chart/chart.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomepageComponent},
@@ -35,7 +37,8 @@ const appRoutes: Routes = [
   {path: 'comparison', component: ComparisonComponent},
   {path: 'admin-panel', component: AdminPanelComponent},
   {path: 'account', component: AccountComponent},
-  {path: 'edit-users', component: EditUsersComponent}
+  {path: 'edit-users', component: EditUsersComponent},
+  {path: 'statistics', component: ChartComponent}
 
 ];
 
@@ -58,7 +61,8 @@ const appRoutes: Routes = [
     PostReportComponent,
     AdminPanelComponent,
     AccountComponent,
-    EditUsersComponent
+    EditUsersComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    ScrollToModule.forRoot()
+    ScrollToModule.forRoot(),
+    ChartsModule
   ],
   providers: [DarkModeService,
     {
