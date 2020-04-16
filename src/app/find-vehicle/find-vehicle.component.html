@@ -1,6 +1,6 @@
 <app-check-date *ngIf="isCheckDate"></app-check-date>
 <app-edit-car *ngIf="editCar"></app-edit-car>
-<div class="container">
+<div *ngIf="!loadingData" class="container">
   <div class="row mt-5">
     <div class="col-lg-8 col-sm-12">
       <h1 class="m-auto text-lg-right text-sm-center"></h1>
@@ -269,3 +269,7 @@
     </ul>
   </nav>
 </div>
+<div *ngIf="loadingData" class="spinner">
+  <app-loading-spinner ></app-loading-spinner>
+</div>
+

@@ -11,6 +11,7 @@ export class EditUsersComponent implements OnInit {
   users = [];
   historyArray = [];
   isOpenHistory: boolean = false;
+  loadingData = true;
   constructor(private http: HttpClient, private userPanel: UserPanelService) { }
 
   ngOnInit(): void {
@@ -18,6 +19,7 @@ export class EditUsersComponent implements OnInit {
   }
 
   getAllUsers() {
+    this.loadingData = true;
     this.userPanel.getAllUsers().subscribe(
       data => {
         for (const element in data) {
@@ -30,6 +32,7 @@ export class EditUsersComponent implements OnInit {
       },
       () => {
         this.addHistoryToUser();
+        this.loadingData = false;
       }
     );
   }

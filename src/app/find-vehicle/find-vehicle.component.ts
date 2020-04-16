@@ -16,6 +16,7 @@ import {Router} from '@angular/router';
 export class FindVehicleComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
   private isAdministrator = false;
+  loadingData = true;
   page = 1;
   limit = 2;
   canBeNext = false;
@@ -133,6 +134,7 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
     }
   }
   getAllVehicles() {
+    this.loadingData = true;
     this.canBeNext = false;
     this.canBePrevious = false;
     this.findVehicleService.getAllVehicles(this.page, this.limit).subscribe(
@@ -165,6 +167,7 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
       },
       () => {
         this.orderResult();
+        this.loadingData = false;
       }
     );
   }
