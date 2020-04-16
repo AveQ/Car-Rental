@@ -14,5 +14,64 @@ export class UserPanelService {
   getAllUsers() {
     return this.http.get('http://localhost:3001/user/');
   }
+  patchUserHistory(idUser, history) {
+    let userHistory;
+    this.http.get('http://localhost:3001/user/' + idUser).subscribe(
+      data => {
+        for (const element in data) {
+          if (data.hasOwnProperty(element)) {
+            if (element === 'historyId') {
+                userHistory = data[element];
+            }
+          }
+        }
+      },
+      error => {
+      },
+      () => {
+        if (userHistory.includes(' ') ){
+          if (userHistory.split(history + ' ')[1]) {
+            userHistory = userHistory.split(history + ' ')[0].concat(userHistory.split(history + ' ')[1]);
+          } else {
+            userHistory = userHistory.split(history)[0];
+          }
+        } else {
+          userHistory = '';
+        }
+        this.http.patch(('http://localhost:3001/user/' + idUser), [{'propName': 'historyId', 'value': userHistory}]).subscribe();
+      }
+    );
+  }
+  patchVehicleHistory(idVehicle, history) {
+    let vehHistory;
+    this.http.get('http://localhost:3001/vehicles/' + idVehicle).subscribe(
+      data => {
+        for (const element in data) {
+          if (data.hasOwnProperty(element)) {
+            if (element === 'historyId') {
+              vehHistory = data[element];
+            }
+          }
+        }
+      },
+      error => {
+      },
+      () => {
+        if (vehHistory.includes(' ') ){
+          if (vehHistory.split(history + ' ')[1]){
+            vehHistory = vehHistory.split(history + ' ')[0].concat(vehHistory.split(history + ' ')[1]);
+          } else {
+            vehHistory = vehHistory.split(history)[0];
+          }
+        } else {
+          vehHistory = '';
+        }
+        this.http.patch(('http://localhost:3001/vehicles/' + idVehicle), [{'propName': 'historyId', 'value': vehHistory}]).subscribe();
+      }
+    );
+  }
+  deleteHistory(idHistory) {
+    this.http.delete('http://localhost:3001/history/' + idHistory).subscribe();
+  }
 
 }

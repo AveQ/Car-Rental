@@ -49,7 +49,6 @@ export class ChartComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getAllVehicle();
-    console.log(Math.max(...this.cars));
   }
   getAllVehicle() {
     let tempArrayNumbers = [];
@@ -89,7 +88,6 @@ export class ChartComponent implements OnInit {
           tempArrayNumbers[4],
         ];
 
-        console.log(tempArrayName);
         for (let i = 0; i < 5; i ++) {
           if (tempArrayName[i]) {
             this.barChartLabels[i] = tempArrayName[i];

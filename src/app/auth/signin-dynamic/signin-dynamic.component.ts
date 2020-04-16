@@ -35,7 +35,6 @@ export class SigninDynamicComponent implements OnInit {
     );
     }
   onSubmit() {
-    console.log(this.signinForm);
     let authObs: Observable<AuthResponseData>;
     if (this.signup) {
       authObs = this.siginSer.signup(this.signinForm.value);

@@ -19,7 +19,6 @@ export class ComparisonComponent implements OnInit {
 
   ngOnInit(): void {
     this.arrayWithObjects = this.comparisonService.getCarArray();
-    console.log(this.arrayWithObjects[0]);
   }
 
   asIsOrder(a, b) {

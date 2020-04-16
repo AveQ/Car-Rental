@@ -65,7 +65,5 @@ export class EditUsersComponent implements OnInit {
           this.historyArray = histArray;
         });
     }
-
-    console.log(this.users);
   }
 }

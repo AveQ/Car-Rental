@@ -80,7 +80,6 @@ export class AddNewCarComponent implements OnInit {
   }
 
   selectOption(value) {
-    console.log(value.value);
     this.tempEquipment = {key: value.value, value: value.text};
   }
 

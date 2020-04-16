@@ -15,7 +15,8 @@ export class CheckDateComponent implements OnInit {
   date: string ;
   response: boolean = false;
   available: boolean = false;
-
+  isError: boolean;
+  postRent = false;
   constructor( private dateService: CheckDateService) { }
 
   ngOnInit(): void {
@@ -23,7 +24,7 @@ export class CheckDateComponent implements OnInit {
     this.createForm();
     this.carToRent = this.dateService.getCar();
     this.carBrand = this.carToRent.brand;
-
+    this.dateService.isError.subscribe(isErr => {this.isError = isErr;});
   }
   createDay() {
     let month;
@@ -44,7 +45,7 @@ export class CheckDateComponent implements OnInit {
     this.dateService.checkComp.next(false);
   }
   onSubmit() {
-    console.log(this.dateForm);
     this.dateService.createRentalDate(this.dateForm.value);
+    this.postRent = true;
   }
 }

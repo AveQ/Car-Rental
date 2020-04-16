@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Subject, Subscription} from 'rxjs';
+import {BehaviorSubject, Subject, Subscription} from 'rxjs';
 import {SigninDynamicService} from '../../services/signinDynamic.service';
 import {FindVehicleService} from '../../services/find-vehicle.service';
 
@@ -17,6 +17,7 @@ export class CheckDateService {
   private vehHistory: string = '';
   private userHistory: string = '';
   private historyId;
+  isError: BehaviorSubject<boolean> = new BehaviorSubject(false);
   userSub: Subscription;
 
   constructor(private http: HttpClient, private authService: SigninDynamicService, private findVehService: FindVehicleService) {
@@ -29,37 +30,37 @@ export class CheckDateService {
         this.accessToReq = !!user;
       });
   }
+
   createRentalDate(form) {
     const startD = form.trip_start;
     const numberOfDays = form.days;
     this.endDay = new Date((new Date(startD).getTime() + (numberOfDays * 86400000)));
     this.startDay = new Date(startD);
-    console.log(new Date(this.endDay));
     this.checkDays();
   }
 
   checkDays() {
-    this.http.get('http://localhost:3001/history').subscribe(
+    return this.http.get('http://localhost:3001/history').subscribe(
       data => {
         if (this.accessToReq) {
           let startReser;
           let endReser;
           for (const element in data) {
             if (data.hasOwnProperty(element)) {
-              console.log("test" + this.carToRent._id);
-              // if (data[element].vehicleId !== this.carToRent._id)
-                startReser = new Date(data[element].from);
-                endReser = new Date(data[element].to);
-                if (!this.dateCompare(startReser.getTime(), endReser.getTime()) && data[element].vehicleId === this.carToRent._id) {
-                  return null;
-                }
-
+              startReser = new Date(data[element].from);
+              endReser = new Date(data[element].to);
+              if (!this.dateCompare(startReser.getTime(), endReser.getTime()) && data[element].vehicleId === this.carToRent._id) {
+                this.isError.next(true);
+                return null;
+              }
             }
           }
           this.setReservation();
+          this.isError.next(false);
         }
       },
-      error => {},
+      error => {
+      },
       () => {
       }
     );
@@ -74,43 +75,49 @@ export class CheckDateService {
     }
     return false;
   }
+
   setCar(car) {
     this.carToRent = car;
   }
+
   getCar() {
     return this.carToRent;
   }
+
   setReservation() {
-    this.http.post('http://localhost:3001/history', {userId: this.idUser, userEmail: this.userEmail, vehicleId: this.carToRent._id,
-        vehicleName: this.carToRent.brand, from: this.startDay , to: this.endDay})
-        .subscribe(
-          data => {
-              for (const element in data) {
-                if (data.hasOwnProperty(element)) {
-                  if (element === 'history') {
-                    this.historyId = data[element]._id;
-                  }
-                }
+    this.http.post('http://localhost:3001/history', {
+      userId: this.idUser, userEmail: this.userEmail, vehicleId: this.carToRent._id,
+      vehicleName: this.carToRent.brand, from: this.startDay, to: this.endDay
+    })
+      .subscribe(
+        data => {
+          for (const element in data) {
+            if (data.hasOwnProperty(element)) {
+              if (element === 'history') {
+                this.historyId = data[element]._id;
               }
-          },
-          error => {},
-          () => {
-            this.getCurrentHistory();
+            }
           }
-        );
+        },
+        error => {
+        },
+        () => {
+          this.getCurrentHistory();
+        }
+      );
   }
+
   getCurrentHistory() {
     this.findVehService.getOneVehicle(this.carToRent._id).subscribe(
       data => {
         for (const element in data) {
           if (data.hasOwnProperty(element)) {
             if (element === 'historyId') {
-              if ( data[element] === '' ){
+              if (data[element] === '') {
                 this.vehHistory = data[element] + this.historyId;
               } else {
                 this.vehHistory = data[element] + ' ' + this.historyId;
               }
-              console.log(data[element]);
             }
           }
         }
@@ -118,22 +125,23 @@ export class CheckDateService {
       error => {
       },
       () => {
-        console.log("id: " + this.carToRent._id +" dane: "+ this.vehHistory);
         this.patchVehVal();
         this.patchUserVal();
       }
     );
   }
+
   patchVehVal() {
     this.findVehService.patchVehicle(this.carToRent._id, 'historyId', this.vehHistory).subscribe();
   }
+
   patchUserVal() {
     this.http.get('http://localhost:3001/user/' + this.idUser).subscribe(
       data => {
         for (const element in data) {
           if (data.hasOwnProperty(element)) {
             if (element === 'historyId') {
-              if ( data[element] === '' ) {
+              if (data[element] === '') {
                 this.userHistory = data[element] + this.historyId;
               } else {
                 this.userHistory = data[element] + ' ' + this.historyId;
@@ -146,7 +154,6 @@ export class CheckDateService {
 
       },
       () => {
-        console.log(this.userHistory);
         this.http.patch(('http://localhost:3001/user/' + this.idUser), [{'propName': 'historyId', 'value': this.userHistory}]).subscribe();
       }
     );
@@ -154,18 +161,3 @@ export class CheckDateService {
 
   }
 }
-
-
-/*
-
-console.log(startDay);
-    console.log(endDay);
-
-    if (startDay > endDay) {
-      console.log('mlodszy');
-    } else if (endDay > startDay) {
-      console.log('starsza');
-    } else {
-      console.log('=');
-    }
- */

@@ -25,7 +25,6 @@ export class FindVehicleService {
 
   orderVehicles(data, order, type) {
     order = order.replace(' ', '').toLowerCase();
-    console.log(order);
     const test = data.sort((a, b) => {
       if (type === 'asc') {
         return ((a[order] > b[order]) ? 1 : (a[order] < b[order]) ? -1 : 0);

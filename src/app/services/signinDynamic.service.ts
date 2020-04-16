@@ -61,7 +61,6 @@ export class SigninDynamicService {
     private handleAuthentication(id, email, token, expirationDate, isAdmin, historyId) {
       const expDate = new Date(new Date().getTime() + +expirationDate * 1000); // one hour expiration
       const user = new User(id, email, token, expDate, isAdmin, historyId);
-      console.log(user);
       this.user.next(user);
       localStorage.setItem('userData', JSON.stringify(user));
     }

@@ -9,7 +9,7 @@
         <div class="col-6 accountInfo">From: {{futureCar.from | date}}</div>
         <div class="col-6 accountInfo">To: {{futureCar.to | date}}</div>
         <div class="col-12 text-right">
-          <div class="btn btn-dark accountBtn text-success">CANCEL</div>
+          <div class="btn btn-dark accountBtn text-success" (click)="deleteHistory(futureCar)">CANCEL</div>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
         <div class="col-6 accountInfo">From: {{currentlyCar.from | date}}</div>
         <div class="col-6 accountInfo">To: {{currentlyCar.to | date}}</div>
         <div class="col-12 text-right">
-          <div class="btn btn-dark accountBtn text-primary">CANCEL</div>
+          <div class="btn btn-dark accountBtn text-primary" (click)="deleteHistory(currentlyCar)">CANCEL</div>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
         <div class="col-6 accountInfo">From: {{inactiveCar.from | date}}</div>
         <div class="col-6 accountInfo">To: {{inactiveCar.to | date}}</div>
         <div class="col-12 text-right">
-          <div class="btn btn-dark accountBtn text-danger">DELETE</div>
+          <div class="btn btn-dark accountBtn text-danger" (click)="deleteHistory(inactiveCar)">DELETE</div>
         </div>
       </div>
     </div>
