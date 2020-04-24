@@ -18,6 +18,7 @@ export class SigninDynamicComponent implements OnInit {
   focusonPassword: boolean = false;
   dataInvalid: boolean = false;
   signup: boolean = false;
+  authFailed = false;
 
   constructor(
     private ele: ElementRef,
@@ -35,6 +36,7 @@ export class SigninDynamicComponent implements OnInit {
     );
     }
   onSubmit() {
+    this.authFailed = false;
     let authObs: Observable<AuthResponseData>;
     if (this.signup) {
       authObs = this.siginSer.signup(this.signinForm.value);
@@ -46,7 +48,11 @@ export class SigninDynamicComponent implements OnInit {
       resData => {
         this.router.navigate(['/']);
       },
-      error => {},
+      error => {
+        if (error.error.message === 'Auth failed') {
+          this.authFailed = true;
+        }
+      },
       () => {}
     );
   }

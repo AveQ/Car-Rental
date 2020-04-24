@@ -12,7 +12,7 @@ $darkMode: rgb(129, 129, 129);
     font-weight: 600;
     font-size: 30px;
     position: relative;
-    
+
     &::after {
         content: '';
         position: absolute;
@@ -55,4 +55,10 @@ $darkMode: rgb(129, 129, 129);
 .container-image {
     height: 200px;
     line-height: 200px;
+}
+@media(max-width: 350px){
+  .text-paragraph {
+    width: 200px;
+  }
+
 }

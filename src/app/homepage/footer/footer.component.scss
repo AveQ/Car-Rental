@@ -4,19 +4,27 @@ $myColor: #0070ad;
     font-family: "Abril Fatface", cursive;
     padding:50px 0;
 }
+.row {
+  margin:0;
+}
 .footer-mainText{
+  display: inline-block;
     font-size: 24px;
     letter-spacing:4px;
     font-weight: bold;
     padding-bottom: 20px;
 }
 .containerForMainText{
+  padding: 0;
+  display: inline-block;
+  width: 100px;
     & hr {
         border-top-color: $myColor;
+      width: 80vw;
      }
 }
 .col-element {
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 .footer-otherText {
     margin-top: 30px;
@@ -31,5 +39,6 @@ $myColor: #0070ad;
 .col-social{
     line-height: 30px;
     font-weight: bold;
+    padding: 0;
 }
 

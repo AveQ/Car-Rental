@@ -9,13 +9,12 @@
     z-index: 10;
   }
   .auth__box {
-      position: absolute; 
+      position: absolute;
       top:50%;
       left:50%;
       font-family: 'Abril Fatface', cursive;
       font-size: 24px;
-      transform: translateX(-50%) translateY(-50% );  // for issue with blurry text if position is fix
-      z-index: 0;
+      transform: translateX(-50.2%) translateY(-50.2% );  // for issue with blurry text if position is fix
       padding:40px;
       background-color: white;
       border-radius: 4px;
@@ -49,7 +48,7 @@
       border-bottom: 2px solid #e5e5e5;
       transition: box-shadow 150ms ease-out;
       &:focus {
-        
+
       }
     }
     input.ng-touched.ng-invalid {
@@ -57,7 +56,7 @@
       border-bottom: 2px solid red;
     }
     .form-group {
-      position:relative;  
+      position:relative;
       & + .form-group {
         margin-top: 10px;
       }
@@ -77,4 +76,27 @@
     #password {
         margin-bottom: 10px;
     }
-  
+    .form__info {
+      padding-top: 20px;
+    }
+@media(max-width: 690px){
+  p{
+    font-size: 16px;
+    text-align: center;
+  }
+  .auth__box {
+    width: 310px;
+  }
+}
+@media(max-width: 500px){
+  .btn-outline-dark {
+
+  }
+  .btn-dark {
+    padding: 2px;
+  }
+  .login {
+    text-align: center;
+  }
+
+}
