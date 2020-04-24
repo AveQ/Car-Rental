@@ -30,7 +30,6 @@ import {SigninDynamicService} from './services/signinDynamic.service';
 import {ChartsModule} from 'ng2-charts';
 import {ChartComponent} from './find-vehicle/chart/chart.component';
 import {LoadingSpinnerComponent} from './loading-spinner/loading-spiner.component';
-
 const appRoutes: Routes = [
 
 

@@ -6,7 +6,7 @@
         <h3 class="text-center mt-3 header">Main info</h3>
       </div>
         <div class="col-11 containerForTable">
-            <table class=" table myTable">
+            <table id="myTable" class=" table myTable">
                 <!--
                     Names
                 -->
@@ -36,7 +36,7 @@
         </div>
       <h3 class="text-center mt-2">Equipment</h3>
       <div class="col-11 containerForTable">
-        <table class="table myTable">
+        <table id="mySecTable" class="table myTable">
           <!--
               Names
           -->
@@ -72,7 +72,7 @@
         -->
         <div class="btn-group">
             <button routerLink='/vehicles' type="button" class="btn btn-dark">Back</button>
-            <button type="button" class="btn btn-dark">PDF</button>
+            <button type="button" class="btn btn-dark" (click)="createPDF()">PDF</button>
         </div>
     </div>
 </div>

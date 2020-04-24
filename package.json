@@ -22,6 +22,8 @@
     "@angular/router": "~9.0.2",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
+    "jspdf": "^1.5.3",
+    "jspdf-autotable": "^3.4.4",
     "ng2-charts": "^2.3.0",
     "ng2-scroll-to": "^1.0.7",
     "ng2-scroll-to-el": "^1.2.1",
