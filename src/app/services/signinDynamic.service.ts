@@ -21,7 +21,6 @@ export class SigninDynamicService {
     user = new BehaviorSubject<User>(null);
 
     constructor(private http: HttpClient) {this.subject = new Subject<boolean>(); }
-
     autoLogin() {
       const userData: {
         id: string,

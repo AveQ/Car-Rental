@@ -21,6 +21,7 @@ $myColor: #0070ad;
     & hr {
         border-top-color: $myColor;
       width: 80vw;
+      max-width: 500px;
      }
 }
 .col-element {

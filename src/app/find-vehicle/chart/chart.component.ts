@@ -11,7 +11,7 @@ export class ChartComponent implements OnInit {
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
-    scales : {
+    scales: {
       yAxes: [{
         ticks: {
           beginAtZero: true
@@ -43,27 +43,31 @@ export class ChartComponent implements OnInit {
       hoverBackgroundColor: 'rgba(214,37,18,0.59)',
     },
   ];
+
   constructor(
     private vehicleService: FindVehicleService
   ) {
   }
+
   ngOnInit(): void {
     this.getAllVehicle();
   }
+
   getAllVehicle() {
     let tempArrayNumbers = [];
     let tempArray = [];
     let tempArrayName = [];
     this.vehicleService.getAllVehicleWithoutPag().subscribe(
       cars => {
-        for (const element in cars ) {
+        for (const element in cars) {
           if (cars.hasOwnProperty(element)) {
             tempArray.push(cars[element]);
             tempArrayNumbers.push(cars[element].historyId.split(' ').length);
           }
         }
       },
-      error => {},
+      error => {
+      },
       () => {
         tempArrayNumbers = tempArrayNumbers.sort((a, b) => {
           return b - a;
@@ -80,15 +84,15 @@ export class ChartComponent implements OnInit {
         });
         this.cars = tempArray;
         this.barChartData[0].data =
-        [
-          tempArrayNumbers[0],
-          tempArrayNumbers[1],
-          tempArrayNumbers[2],
-          tempArrayNumbers[3],
-          tempArrayNumbers[4],
-        ];
+          [
+            tempArrayNumbers[0],
+            tempArrayNumbers[1],
+            tempArrayNumbers[2],
+            tempArrayNumbers[3],
+            tempArrayNumbers[4],
+          ];
 
-        for (let i = 0; i < 5; i ++) {
+        for (let i = 0; i < 5; i++) {
           if (tempArrayName[i]) {
             this.barChartLabels[i] = tempArrayName[i];
           }

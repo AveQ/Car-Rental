@@ -1,7 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DarkModeService} from '../services/darkMode.service';
 import {SigninDynamicService} from '../services/signinDynamic.service';
 import {Subscription} from 'rxjs';
+import {ScrollIntoService} from '../services/scrollInto.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -17,10 +19,9 @@ export class NavComponent implements OnInit, OnDestroy {
   private isAdministrator = false;
   nameOfUser = 'GUEST';
   typeOfUser = 'GUEST';
-
-  constructor(private modeService: DarkModeService, private signService: SigninDynamicService) {
+  @ViewChild('ttest') ttest;
+  constructor(private modeService: DarkModeService, private signService: SigninDynamicService, private scrollService: ScrollIntoService, private router: Router) {
   }
-
   ngOnInit(): void {
     this.signService.subject.subscribe(value => {
       this.isSigninPanelOpen = value;
@@ -38,13 +39,11 @@ export class NavComponent implements OnInit, OnDestroy {
       }
     });
   }
-
   openLanguageList() {
     if (this.isLanguageMenuOpen === true) {
       return 'nav-languages--open';
     }
   }
-
   openMainMenu() {
     const obj = {
       'nav-menu--open': this.isMainmenuOpen,
@@ -52,7 +51,6 @@ export class NavComponent implements OnInit, OnDestroy {
     };
     return obj;
   }
-
   signStatus() {
     if (!this.isAuthenticated) {
       this.isSigninPanelOpen = !this.isSigninPanelOpen;
@@ -60,37 +58,32 @@ export class NavComponent implements OnInit, OnDestroy {
       this.isSigninPanelOpen = false;
     }
   }
-
   languageStatus() {
     this.isLanguageMenuOpen = !this.isLanguageMenuOpen;
   }
-
   menuStatus() {
     this.isMainmenuOpen = !this.isMainmenuOpen;
   }
-
   changeMode(value: string) {
     return this.modeService.changeMode(value);
   }
-
   otherMode(value) {
     this.modeService.otherMode(value);
   }
-
   isSigninTrue() {
     return this.isSigninPanelOpen;
   }
-
   logout() {
     this.signService.logout();
   }
-
   isUserAnAdmin() {
     return (this.isAdministrator && this.isAuthenticated);
   }
-
   ngOnDestroy(): void {
     this.signService.subject.unsubscribe();
     this.userSub.unsubscribe();
+  }
+  scrollInto(where) {
+    this.router.navigate(['/']).finally(() => {this.scrollService.changeSubject(where);});
   }
 }

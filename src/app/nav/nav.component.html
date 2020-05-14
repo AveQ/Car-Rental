@@ -2,7 +2,6 @@
 <nav [ngClass]="changeMode('navbar')">
   <div class="nav-container-button" (click)=" menuStatus()">
     <div class="nav-menu-cross">
-
     </div>
   </div>
   <div routerLink='' class="nav-brand">
@@ -23,7 +22,6 @@
         </g>
       </g>
     </svg>
-
     <span class="nav-logo nav-brand-textTwo">
             RENTAL
         </span>
@@ -33,7 +31,6 @@
             <span class="nav-language-fullname">USA |</span> <span class="nav-language-smallName"> EN</span>
         </span>
     <span class="arrow" (click)="languageStatus()">
-
         </span>
     <div class="nav-languages" [ngClass]="openLanguageList()">
       <ul class="nav-languages-menu">
@@ -53,18 +50,17 @@
             </g>
           </svg>
           <span class="nav-language-fullname">
-                        Polski
-                    </span>
+            Polski
+          </span>
         </li>
         <li class="nav-language-element">
           <img src="https://img.icons8.com/color/48/000000/usa.png"/>
           <span class="nav-language-fullname">
-                        English
-                    </span>
+            English
+          </span>
         </li>
       </ul>
     </div>
-
   </div>
   <div class="nav-menu" [ngClass]="openMainMenu()">
     <ul class="nav-list">
@@ -87,24 +83,18 @@
           </svg>
         </a>
       </li>
-      <li class="nav-element">
-        <a href="#" class="nav-link" [ngClass]="changeMode('link')">
+      <li (click)="scrollInto('aboutUs')" class="nav-element">
+        <a class="nav-link" [ngClass]="changeMode('link')">
           <span>About us</span>
           <img class="nav-menu-image" src="https://img.icons8.com/carbon-copy/40/000000/info.png"/>
         </a>
       </li>
-      <li class="nav-element">
-        <a href="#" class="nav-link" [ngClass]="changeMode('link')">
+      <li (click)="scrollInto('localisation')" class="nav-element">
+        <a class="nav-link" [ngClass]="changeMode('link')">
           <span>Localisation</span>
           <img class="nav-menu-image" src="https://img.icons8.com/carbon-copy/40/000000/map.png"/>
         </a>
       </li>
-      <!--          <li class="nav-element">-->
-      <!--                <a routerLink='/new-car' class="nav-link" [ngClass]="changeMode('link')">-->
-      <!--                    <span>Add car</span>-->
-      <!--                    <img class="nav-menu-image" src="https://img.icons8.com/cotton/40/000000/settings&#45;&#45;v1.png" />-->
-      <!--                </a>-->
-      <!--            </li>-->
       <li class="nav-element nav-element-account" (click)="signStatus()"><a class="nav-link" [ngClass]="changeMode('link')">
         <small class="logging">{{typeOfUser}}</small>
         <svg class="logging" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 172 172"
