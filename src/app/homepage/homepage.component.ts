@@ -33,8 +33,5 @@ export class HomepageComponent implements OnInit {
     return this.modeSerive.changeMode(value);
   }
 
-  goToRent() {
-    this.router.navigate(['vehicles']);
-  }
 
 }

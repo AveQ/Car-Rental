@@ -21,3 +21,9 @@ $darkMode: rgb(129, 129, 129);
   padding: 4px;
   margin-bottom: 4px;
 }
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}

@@ -17,6 +17,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   futureRentals = [];
   currentlyRentals = [];
   inactiveRentals = [];
+  loadFinish = false;
   userSub: Subscription;
   constructor(private router: Router, private userService: UserPanelService, private authService: SigninDynamicService) { }
 
@@ -44,10 +45,13 @@ export class AccountComponent implements OnInit, OnDestroy {
         }
       },
       error => {
+        this.loadFinish = true;
       },
       () => {
         if (this.historyId !== '') {
           this.assignToCorrectArray();
+        } else {
+          this.loadFinish = true;
         }
       }
     );
@@ -78,11 +82,10 @@ export class AccountComponent implements OnInit, OnDestroy {
           } else {
             this.currentlyRentals.push(obj);
           }
-
         },
         error => {},
         () => {
-
+          this.loadFinish = true;
         }
       );
     }

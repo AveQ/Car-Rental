@@ -6,7 +6,7 @@ import {SigninDynamicService} from '../services/signinDynamic.service';
 import {take} from 'rxjs/operators';
 import {CheckDateService} from './check-date/check-date-service.service';
 import {CarComparisonService} from '../services/carComparison.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-find-vehicle',
@@ -43,6 +43,7 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
     'desc'
   ];
   currentType = 'asc';
+  paramsSubscription: Subscription;
 
   constructor(
     private checkDateService: CheckDateService,
@@ -51,10 +52,21 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
     private router: Router,
     private findVehicleService: FindVehicleService,
     private signService: SigninDynamicService,
-    private comparisonService: CarComparisonService) {
+    private comparisonService: CarComparisonService,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    // this.paramsSubscription = this.route.params.subscribe(
+    //   (params: Params) => {
+    //     this.page = params['page'];
+    //   }
+    // );
+    this.paramsSubscription = this.route.queryParams.subscribe(
+      (params: Params) => {
+        this.page = params.page;
+      }
+    );
     this.initCheckComp();
     this.getAllVehicles();
     this.userSub = this.signService.user.pipe(take(1)).subscribe(user => {
@@ -65,6 +77,7 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
       }
       this.isSignIn = !!user;
     });
+
   }
 
   initCheckComp() {
@@ -78,7 +91,6 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
 
   addToCompare(car) {
     this.comparisonService.addCar(car);
-
   }
 
   comparison() {
@@ -125,12 +137,14 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
     if ( this.canBeNext ) {
       this.page++;
       this.getAllVehicles();
+      this.router.navigate(['/vehicles'], {queryParams: {page: this.page}});
     }
   }
   previousPage() {
     if ( this.canBePrevious ) {
       this.page--;
       this.getAllVehicles();
+      this.router.navigate(['/vehicles'], {queryParams: {page: this.page}});
     }
   }
   getAllVehicles() {
@@ -219,6 +233,7 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
     );
   }
   ngOnDestroy(): void {
+    this.paramsSubscription.unsubscribe();
   }
 }
 

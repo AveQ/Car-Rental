@@ -71,7 +71,7 @@
             back to vehicles or gener. pdf
         -->
         <div class="btn-group">
-            <button routerLink='/vehicles' type="button" class="btn btn-dark">Back</button>
+            <button [routerLink]="['/vehicles']" [queryParams]="{page: 1}" type="button" class="btn btn-dark">Back</button>
             <button type="button" class="btn btn-dark" (click)="createPDF()">PDF</button>
         </div>
     </div>

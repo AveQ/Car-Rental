@@ -8,17 +8,23 @@ import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {AccountComponent} from './account/account.component';
 import {EditUsersComponent} from './admin-panel/edit-users/edit-users.component';
 import {ChartComponent} from './find-vehicle/chart/chart.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {AuthGuard} from './services/auth-guard.service';
+import {AuthGuardAdmin} from './services/auth-guard-admin.service';
 
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'new-car', component: AddNewCarComponent},
+  // {path: 'vehicles', component: FindVehicleComponent},
   {path: 'vehicles', component: FindVehicleComponent},
   {path: 'comparison', component: ComparisonComponent},
-  {path: 'admin-panel', component: AdminPanelComponent},
-  {path: 'account', component: AccountComponent},
+  {path: 'admin-panel', canActivate: [AuthGuardAdmin], component: AdminPanelComponent},
+  {path: 'account', canActivate: [AuthGuard], component: AccountComponent},
   {path: 'edit-users', component: EditUsersComponent},
-  {path: 'statistics', component: ChartComponent}
+  {path: 'statistics', component: ChartComponent},
+  {path: 'not-found', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/not-found'}
 ];
 
 @NgModule({

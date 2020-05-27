@@ -20,7 +20,10 @@ export class NavComponent implements OnInit, OnDestroy {
   nameOfUser = 'GUEST';
   typeOfUser = 'GUEST';
   @ViewChild('ttest') ttest;
-  constructor(private modeService: DarkModeService, private signService: SigninDynamicService, private scrollService: ScrollIntoService, private router: Router) {
+  constructor(private modeService: DarkModeService,
+              private signService: SigninDynamicService,
+              private scrollService: ScrollIntoService,
+              private router: Router) {
   }
   ngOnInit(): void {
     this.signService.subject.subscribe(value => {
@@ -50,6 +53,9 @@ export class NavComponent implements OnInit, OnDestroy {
       'nav-menu--darkmode': this.modeService.isDarkMode
     };
     return obj;
+  }
+  closeMainMenu() {
+    this.isMainmenuOpen = !this.isMainmenuOpen;
   }
   signStatus() {
     if (!this.isAuthenticated) {
@@ -83,7 +89,7 @@ export class NavComponent implements OnInit, OnDestroy {
     this.signService.subject.unsubscribe();
     this.userSub.unsubscribe();
   }
-  scrollInto(where) {
-    this.router.navigate(['/']).finally(() => {this.scrollService.changeSubject(where);});
+  scrollInto(where, info) {
+    this.router.navigate(['/'], {queryParams: {action: info}}).finally(() => {this.scrollService.changeSubject(where);});
   }
 }

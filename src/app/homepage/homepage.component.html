@@ -2,7 +2,7 @@
     <div class="homepage-text">
         <p class="firstPar">Make your dreams come true</p>
         <p class="secondPar">and rent car today!</p>
-        <button class =" btn btn-outline-light btn-homepage" (click)="goToRent()">Check this out!</button>
+        <button [routerLink]="['/vehicles']" [queryParams]="{page: 1}" class =" btn btn-outline-light btn-homepage">Check this out!</button>
     </div>
 </div>
 <div class="underImage" [ngClass]="changeMode('underImage')">

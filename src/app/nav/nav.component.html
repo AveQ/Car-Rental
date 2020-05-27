@@ -65,7 +65,7 @@
   <div class="nav-menu" [ngClass]="openMainMenu()">
     <ul class="nav-list">
       <li class="nav-element" [ngClass]="changeMode('element')">
-        <a routerLink='/vehicles' class="nav-link" [ngClass]="changeMode('link')">
+        <a [routerLink]="['/vehicles']" [queryParams]="{page: 1}" class="nav-link" [ngClass]="changeMode('link')" (click)="closeMainMenu()">
           <span>Vehicles</span>
           <svg class="nav-menu-image" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40"
                height="40" viewBox="0 0 172 172" style=" fill:#000000;">
@@ -83,15 +83,21 @@
           </svg>
         </a>
       </li>
-      <li (click)="scrollInto('aboutUs')" class="nav-element">
-        <a class="nav-link" [ngClass]="changeMode('link')">
+      <li (click)="scrollInto('aboutUs', 'aboutUs')" class="nav-element">
+        <a class="nav-link" [ngClass]="changeMode('link')" style="cursor: pointer" (click)="closeMainMenu()">
           <span>About us</span>
           <img class="nav-menu-image" src="https://img.icons8.com/carbon-copy/40/000000/info.png"/>
         </a>
       </li>
-      <li (click)="scrollInto('localisation')" class="nav-element">
-        <a class="nav-link" [ngClass]="changeMode('link')">
+      <li (click)="scrollInto('localisation', 'localisation')" class="nav-element">
+        <a class="nav-link" [ngClass]="changeMode('link')" style="cursor: pointer" (click)="closeMainMenu()">
           <span>Localisation</span>
+          <img class="nav-menu-image" src="https://img.icons8.com/carbon-copy/40/000000/map.png"/>
+        </a>
+      </li>
+      <li class="nav-element">
+        <a class="nav-link" routerLink='/statistics' [ngClass]="changeMode('link')" style="cursor: pointer" (click)="closeMainMenu()">
+          <span>Chart</span>
           <img class="nav-menu-image" src="https://img.icons8.com/carbon-copy/40/000000/map.png"/>
         </a>
       </li>
@@ -114,19 +120,19 @@
         <small class="logging">{{nameOfUser}}</small>
       </a></li>
       <li *ngIf="isAuthenticated" class="nav-element">
-        <a routerLink="/account" class="nav-link" [ngClass]="changeMode('link')">
+        <a routerLink="/account" class="nav-link" [ngClass]="changeMode('link')" (click)="closeMainMenu()">
           <span>Account</span>
           <img class="nav-menu-image" src="https://img.icons8.com/cotton/40/000000/settings--v1.png"/>
         </a>
       </li>
       <li *ngIf="isUserAnAdmin()" class="nav-element">
-        <a routerLink='/admin-panel' class="nav-link" [ngClass]="changeMode('link')">
+        <a routerLink='/admin-panel' class="nav-link" [ngClass]="changeMode('link')" (click)="closeMainMenu()">
           <span>Admin panel</span>
           <img class="nav-menu-image" src="https://img.icons8.com/cotton/40/000000/settings--v1.png"/>
         </a>
       </li>
       <li *ngIf="isAuthenticated"class="nav-element">
-        <a (click) = "logout()" routerLink='/' class="nav-link">
+        <a (click) = "logout()" routerLink='/' class="nav-link" (click)="closeMainMenu()">
           <span>Logout</span>
           <img class="nav-menu-image" src="https://img.icons8.com/cotton/40/000000/settings--v1.png"/>
         </a>

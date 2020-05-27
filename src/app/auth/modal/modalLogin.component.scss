@@ -1,0 +1,52 @@
+.cont {
+  position: absolute;
+  transform: translateX(-50%);
+  left:50%;
+  height: 50px;
+  width: 200px;
+  background-color: #2c931c;
+  border-radius: 20px;
+  padding: 3px;
+  z-index: 4;
+  animation: animationModal linear forwards 3s;
+  font-family: 'Fugaz One', cursive;
+}
+.boxForModal {
+  background-color: white;
+  height: 44px;
+  position: relative;
+  border-radius: 20px;
+}
+.myModal{
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  z-index: 4;
+}
+@keyframes animationModal {
+  0% {
+    top: -200px;
+    opacity: 0;
+  }
+  20% {
+    top: 30px;
+    opacity: 1;
+  }
+  70% {
+    top: 30px;
+    opacity: 1;
+  }
+  99% {
+    top: -200px;
+    opacity: 0;
+  }
+  100% {
+    top: -200px;
+    opacity: 0;
+    overflow: hidden;
+  }
+}
