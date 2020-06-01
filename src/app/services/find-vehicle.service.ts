@@ -22,7 +22,9 @@ export class FindVehicleService {
     patchVehicle(id, toChange, newValue) {
       return this.http.patch(('http://localhost:3001/vehicles/' + id), [{ "propName": toChange, "value": newValue}]);
     }
-
+    getAllRandoms() {
+      return this.http.get('http://localhost:3001/chart');
+    }
   orderVehicles(data, order, type) {
     order = order.replace(' ', '').toLowerCase();
     const test = data.sort((a, b) => {

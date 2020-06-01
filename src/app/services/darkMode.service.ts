@@ -27,6 +27,8 @@ export class DarkModeService {
                     return 'localisation--darkMode';
                 case 'main':
                     return 'mode--night';
+              case 'footer':
+                    return 'footer--dark';
                 }
     }
     }

@@ -73,5 +73,8 @@ export class UserPanelService {
   deleteHistory(idHistory) {
     this.http.delete('http://localhost:3001/history/' + idHistory).subscribe();
   }
+  deleteUser(id) {
+    return this.http.delete('http://localhost:3001/user/' + id);
+  }
 
 }

@@ -30,7 +30,6 @@ import {SigninDynamicService} from './services/signinDynamic.service';
 import {ChartsModule} from 'ng2-charts';
 import {ChartComponent} from './find-vehicle/chart/chart.component';
 import {LoadingSpinnerComponent} from './loading-spinner/loading-spiner.component';
-import { TestComponent } from './test/test.component';
 import {ModalLoginComponent} from './auth/modal/modalLogin.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {AuthGuard} from './services/auth-guard.service';
@@ -62,7 +61,6 @@ const appRoutes: Routes = [
     EditUsersComponent,
     ChartComponent,
     LoadingSpinnerComponent,
-    TestComponent,
     ModalLoginComponent,
     PageNotFoundComponent
   ],

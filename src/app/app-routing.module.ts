@@ -15,13 +15,12 @@ import {AuthGuardAdmin} from './services/auth-guard-admin.service';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
-  {path: 'new-car', component: AddNewCarComponent},
-  // {path: 'vehicles', component: FindVehicleComponent},
+  {path: 'new-car', canActivate: [AuthGuardAdmin], component: AddNewCarComponent},
   {path: 'vehicles', component: FindVehicleComponent},
   {path: 'comparison', component: ComparisonComponent},
   {path: 'admin-panel', canActivate: [AuthGuardAdmin], component: AdminPanelComponent},
   {path: 'account', canActivate: [AuthGuard], component: AccountComponent},
-  {path: 'edit-users', component: EditUsersComponent},
+  {path: 'edit-users', canActivate: [AuthGuardAdmin], component: EditUsersComponent},
   {path: 'statistics', component: ChartComponent},
   {path: 'not-found', component: PageNotFoundComponent},
   {path: '**', redirectTo: '/not-found'}

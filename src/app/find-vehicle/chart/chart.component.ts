@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FindVehicleService} from '../../services/find-vehicle.service';
 
 @Component({
@@ -6,8 +6,9 @@ import {FindVehicleService} from '../../services/find-vehicle.service';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, OnDestroy {
   title = 'Number of rentals';
+  private inter;
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
@@ -44,14 +45,89 @@ export class ChartComponent implements OnInit {
     },
   ];
 
+  // dynamic chart
+
+  titleDynamic = 'Random value';
+  public barChartOptionsDynamic = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  };
+  public barChartLabelsDynamic = ['1', '2', '3', '4', '5'];
+  public barChartLegendDynamic = true;
+  // public valueDynamic = [1, 2, 3, 4, 5];
+  public barChartDataDynamic = [
+    {
+      data: [
+        this.cars[0],
+        this.cars[1],
+        this.cars[2],
+        this.cars[3],
+        this.cars[4]
+      ],
+      label: this.titleDynamic, backgroundColor: 'red'
+    }
+  ];
+  public chartColorsDynamic = [
+    {
+      borderColor: 'silver',
+      pointBackgroundColor: 'rgb(26,132,177)',
+      backgroundColor: [
+        'rgb(214,37,18)',
+        'rgb(0,6,26)',
+        'rgb(27,0,214)',
+        'rgb(0,87,88)',
+        'rgb(5,0,37)'],
+      hoverBackgroundColor: 'rgba(214,37,18,0.59)',
+    },
+  ];
+
   constructor(
     private vehicleService: FindVehicleService
   ) {
   }
 
+  getChartDynamicValue() {
+    let tempArr = [];
+    this.vehicleService.getAllRandoms().subscribe(
+      data => {
+        for (const element in data) {
+          if (data.hasOwnProperty(element)) {
+            tempArr.push(data[element]);
+            console.log(tempArr);
+          }
+        }
+      },
+      error => {
+      },
+      () => {
+        this.barChartDataDynamic[0].data = [
+          tempArr[0],
+          tempArr[1],
+          tempArr[2],
+          tempArr[3],
+          tempArr[4],
+        ];
+        console.log(tempArr);
+      }
+    );
+
+  }
+
   ngOnInit(): void {
     this.getAllVehicle();
+    this.getChartDynamicValue();
+    this.inter = setInterval(() => {
+      this.getChartDynamicValue();
+    }, 3000);
   }
+
 
   getAllVehicle() {
     let tempArrayNumbers = [];
@@ -83,6 +159,7 @@ export class ChartComponent implements OnInit {
           }
         });
         this.cars = tempArray;
+
         this.barChartData[0].data =
           [
             tempArrayNumbers[0],
@@ -100,5 +177,9 @@ export class ChartComponent implements OnInit {
         this.cars = tempArrayName;
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.inter);
   }
 }

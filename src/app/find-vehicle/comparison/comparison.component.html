@@ -1,78 +1,82 @@
 <div class="container-fluid">
   <h1 class="text-center mt-4 header">Comparison</h1>
-    <div class="row justify-content-center">
+  <div class="row justify-content-center">
 
-      <div class="col-12">
-        <h3 class="text-center mt-3 header">Main info</h3>
-      </div>
-        <div class="col-11 containerForTable">
-            <table id="myTable" class=" table myTable">
-                <!--
-                    Names
-                -->
-                <thead class="thead-dark">
-                    <tr>
-                        <th class="element">#</th>
-                        <th class="element">Brand</th>
-                        <th class="element">Model</th>
-                        <th class="element">Price</th>
-                        <th class="element">Mileage</th>
-                        <th class="element">Capacity</th>
-                        <th class="element">Horsepower</th>
-                        <th class="element">Acceleration</th>
-                        <th class="element">Year</th>
-                    </tr>
-                </thead>
-                <!--
-                    objects
-                -->
-                <tr *ngFor = "let object of arrayWithObjects; let i = index">
-                    <th class="element">{{i+1}}</th>
-                    <ng-container *ngFor = "let value of object | keyvalue: asIsOrder; let j = index">
-                        <th class="element" *ngIf="without(value.key) && j < 9">{{value.value}}</th>
-                    </ng-container>
-                </tr>
-            </table>
-        </div>
-      <h3 class="text-center mt-2">Equipment</h3>
-      <div class="col-11 containerForTable">
-        <table id="mySecTable" class="table myTable">
-          <!--
-              Names
-          -->
-          <thead class="thead-dark">
-          <tr>
-            <th class="element">#</th>
-            <th class="element">Brand</th>
-            <th class="element">Manual</th>
-            <th class="element">Multifunction</th>
-            <th class="element">Ventilated Seats</th>
-            <th class="element">Heated Seats</th>
-            <th class="element">Navigation</th>
-            <th class="element">Air Conditioning</th>
-            <th class="element">Sunroof</th>
-            <th class="element">Bi-xenons</th>
-            <th class="element">Xenon</th>
-          </tr>
-          </thead>
-          <!--
-              objects
-          -->
-          <tr *ngFor = "let object of arrayWithObjects; let i = index">
-            <th class="element">{{i+1}}</th>
-            <ng-container *ngFor = "let value of object | keyvalue: asIsOrder; let j = index">
-              <th class="element" *ngIf="j == 1">{{value.value}}</th>
-              <th class="element" *ngIf="without(value.key) && j > 8">{{value.value}}</th>
-            </ng-container>
-          </tr>
-        </table>
-      </div>
-        <!--
-            back to vehicles or gener. pdf
-        -->
-        <div class="btn-group">
-            <button [routerLink]="['/vehicles']" [queryParams]="{page: 1}" type="button" class="btn btn-dark">Back</button>
-            <button type="button" class="btn btn-dark" (click)="createPDF()">PDF</button>
-        </div>
+    <div class="col-12">
+      <h3 class="text-center mt-3 header">Main info</h3>
     </div>
+    <div class="col-11 containerForTable">
+      <table id="myTable" class=" table myTable">
+        <!--
+            Names
+        -->
+        <thead class="thead-dark">
+        <tr>
+          <th class="element">#</th>
+          <th class="element">Brand</th>
+          <th class="element">Model</th>
+          <th class="element">Price</th>
+          <th class="element">Mileage</th>
+          <th class="element">Capacity</th>
+          <th class="element">Horsepower</th>
+          <th class="element">Acceleration</th>
+          <th class="element">Year</th>
+        </tr>
+        </thead>
+        <!--
+            objects
+        -->
+        <tr *ngFor="let object of arrayWithObjects; let i = index">
+          <th class="element">{{i + 1}}</th>
+          <ng-container *ngFor="let value of object | keyvalue: asIsOrder; let j = index">
+            <th class="element" *ngIf="without(value.key) && j < 9">{{value.value}}</th>
+          </ng-container>
+        </tr>
+      </table>
+    </div>
+    <div class="col-12">
+      <h3 class="text-center mt-2">Equipment</h3>
+    </div>
+    <div class="col-11 containerForTable">
+      <table id="mySecTable" class="table myTable">
+        <!--
+            Names
+        -->
+        <thead class="thead-dark">
+        <tr>
+          <th class="element">#</th>
+          <th class="element">Brand</th>
+          <th class="element">Manual</th>
+          <th class="element">Multifunction</th>
+          <th class="element">Ventilated Seats</th>
+          <th class="element">Heated Seats</th>
+          <th class="element">Navigation</th>
+          <th class="element">Air Conditioning</th>
+          <th class="element">Sunroof</th>
+          <th class="element">Bi-xenons</th>
+          <th class="element">Xenon</th>
+        </tr>
+        </thead>
+        <!--
+            objects
+        -->
+        <tr *ngFor="let object of arrayWithObjects; let i = index">
+          <th class="element">{{i + 1}}</th>
+          <ng-container *ngFor="let value of object | keyvalue: asIsOrder; let j = index">
+            <th class="element" *ngIf="j == 1">{{value.value}}</th>
+            <th class="element" *ngIf="without(value.key) && j > 8">{{value.value}}</th>
+          </ng-container>
+        </tr>
+      </table>
+    </div>
+    <!--
+        back to vehicles or gener. pdf
+    -->
+    <div class="col-12 text-center">
+      <div class="btn-group">
+        <button [routerLink]="['/vehicles']" [queryParams]="{page: 1}" type="button" class="btn btn-dark">Back</button>
+        <button type="button" class="btn btn-dark" (click)="createPDF()">PDF</button>
+      </div>
+    </div>
+  </div>
 </div>

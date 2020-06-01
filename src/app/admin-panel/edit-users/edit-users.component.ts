@@ -66,4 +66,7 @@ export class EditUsersComponent implements OnInit {
         });
     }
   }
+  deleteUser(userId) {
+    this.userPanel.deleteUser(userId).subscribe();
+  }
 }

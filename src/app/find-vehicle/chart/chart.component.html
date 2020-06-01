@@ -1,6 +1,21 @@
 <div class="container">
   <div class="row">
     <div class="col-12 text-center mt-5 mb-5">
+      <h1>Dynamic chart example</h1>
+    </div>
+    <div class="col-12">
+      <canvas baseChart class="myChart"
+              [datasets]="barChartDataDynamic"
+              [labels]="barChartLabelsDynamic"
+              [options]="barChartOptionsDynamic"
+              [legend]="barChartLegendDynamic"
+              [chartType]="'polarArea'"
+              [colors] = "chartColorsDynamic"
+      ></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-center mt-5 mb-5">
       <h1>The most popular cars</h1>
     </div>
     <div class="col-12">

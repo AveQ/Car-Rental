@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DarkModeService} from '../../services/darkMode.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modeService: DarkModeService) { }
 
   ngOnInit(): void {
   }
-
+  changeMode(value) {
+    return this.modeService.changeMode(value);
+  }
 }
