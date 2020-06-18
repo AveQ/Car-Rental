@@ -6,17 +6,17 @@ export class UserPanelService {
   constructor(private http: HttpClient) {
   }
   getUser(id) {
-    return this.http.get('http://localhost:3001/user/' + id);
+    return this.http.get('https://localhost:3001/user/' + id);
   }
   checkDateInHistoryId(id) {
-    return this.http.get('http://localhost:3001/history/' + id);
+    return this.http.get('https://localhost:3001/history/' + id);
   }
   getAllUsers() {
-    return this.http.get('http://localhost:3001/user/');
+    return this.http.get('https://localhost:3001/user/');
   }
   patchUserHistory(idUser, history) {
     let userHistory;
-    this.http.get('http://localhost:3001/user/' + idUser).subscribe(
+    this.http.get('https://localhost:3001/user/' + idUser).subscribe(
       data => {
         for (const element in data) {
           if (data.hasOwnProperty(element)) {
@@ -38,13 +38,13 @@ export class UserPanelService {
         } else {
           userHistory = '';
         }
-        this.http.patch(('http://localhost:3001/user/' + idUser), [{'propName': 'historyId', 'value': userHistory}]).subscribe();
+        this.http.patch(('https://localhost:3001/user/' + idUser), [{'propName': 'historyId', 'value': userHistory}]).subscribe();
       }
     );
   }
   patchVehicleHistory(idVehicle, history) {
     let vehHistory;
-    this.http.get('http://localhost:3001/vehicles/' + idVehicle).subscribe(
+    this.http.get('https://localhost:3001/vehicles/' + idVehicle).subscribe(
       data => {
         for (const element in data) {
           if (data.hasOwnProperty(element)) {
@@ -66,15 +66,15 @@ export class UserPanelService {
         } else {
           vehHistory = '';
         }
-        this.http.patch(('http://localhost:3001/vehicles/' + idVehicle), [{'propName': 'historyId', 'value': vehHistory}]).subscribe();
+        this.http.patch(('https://localhost:3001/vehicles/' + idVehicle), [{'propName': 'historyId', 'value': vehHistory}]).subscribe();
       }
     );
   }
   deleteHistory(idHistory) {
-    this.http.delete('http://localhost:3001/history/' + idHistory).subscribe();
+    this.http.delete('https://localhost:3001/history/' + idHistory).subscribe();
   }
   deleteUser(id) {
-    return this.http.delete('http://localhost:3001/user/' + id);
+    return this.http.delete('https://localhost:3001/user/' + id);
   }
 
 }

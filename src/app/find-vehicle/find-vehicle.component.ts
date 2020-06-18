@@ -25,7 +25,7 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
   editCar = false;
   filters = false;
   editMode = false;
-  adres = 'http://localhost:3001/';
+  adres = 'https://localhost:3001/';
   carList = [];
   isSignIn = false;
   carsToComparison = [];
@@ -223,7 +223,7 @@ export class FindVehicleComponent implements OnInit, OnDestroy {
     return this.isAdministrator;
   }
   deleteVehicle(id) {
-    this.http.delete(('http://localhost:3001/vehicles/' + id)).subscribe(data => {
+    this.http.delete(('https://localhost:3001/vehicles/' + id)).subscribe(data => {
       },
       err => {
       },

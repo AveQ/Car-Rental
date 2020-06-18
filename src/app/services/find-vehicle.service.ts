@@ -11,19 +11,19 @@ export class FindVehicleService {
     constructor(private http: HttpClient) {}
 
     getAllVehicles(page, limit) {
-      return this.http.get('http://localhost:3001/vehicles?page=' + page + '&limit=' + limit);
+      return this.http.get('https://localhost:3001/vehicles?page=' + page + '&limit=' + limit);
     }
     getAllVehicleWithoutPag() {
-      return this.http.get('http://localhost:3001/vehicles/all');
+      return this.http.get('https://localhost:3001/vehicles/all');
     }
     getOneVehicle(id) {
-      return this.http.get('http://localhost:3001/vehicles/' + id);
+      return this.http.get('https://localhost:3001/vehicles/' + id);
     }
     patchVehicle(id, toChange, newValue) {
-      return this.http.patch(('http://localhost:3001/vehicles/' + id), [{ "propName": toChange, "value": newValue}]);
+      return this.http.patch(('https://localhost:3001/vehicles/' + id), [{ "propName": toChange, "value": newValue}]);
     }
     getAllRandoms() {
-      return this.http.get('http://localhost:3001/chart');
+      return this.http.get('https://localhost:3001/chart');
     }
   orderVehicles(data, order, type) {
     order = order.replace(' ', '').toLowerCase();

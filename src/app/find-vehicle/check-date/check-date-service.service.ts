@@ -40,7 +40,7 @@ export class CheckDateService {
   }
 
   checkDays() {
-    return this.http.get('http://localhost:3001/history').subscribe(
+    return this.http.get('https://localhost:3001/history').subscribe(
       data => {
         if (this.accessToReq) {
           let startReser;
@@ -85,7 +85,7 @@ export class CheckDateService {
   }
 
   setReservation() {
-    this.http.post('http://localhost:3001/history', {
+    this.http.post('https://localhost:3001/history', {
       userId: this.idUser, userEmail: this.userEmail, vehicleId: this.carToRent._id,
       vehicleName: this.carToRent.brand, from: this.startDay, to: this.endDay
     })
@@ -136,7 +136,7 @@ export class CheckDateService {
   }
 
   patchUserVal() {
-    this.http.get('http://localhost:3001/user/' + this.idUser).subscribe(
+    this.http.get('https://localhost:3001/user/' + this.idUser).subscribe(
       data => {
         for (const element in data) {
           if (data.hasOwnProperty(element)) {
@@ -154,7 +154,7 @@ export class CheckDateService {
 
       },
       () => {
-        this.http.patch(('http://localhost:3001/user/' + this.idUser), [{'propName': 'historyId', 'value': this.userHistory}]).subscribe();
+        this.http.patch(('https://localhost:3001/user/' + this.idUser), [{'propName': 'historyId', 'value': this.userHistory}]).subscribe();
       }
     );
 

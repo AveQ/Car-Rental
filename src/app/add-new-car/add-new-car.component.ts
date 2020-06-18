@@ -113,7 +113,7 @@ export class AddNewCarComponent implements OnInit {
     uploadData.append('xenon', this.newCarForm.get('xenon').value);
     uploadData.append('image', this.selectedFile, this.selectedFile.name);
 
-    this.http.post('http://localhost:3001/vehicles',
+    this.http.post('https://localhost:3001/vehicles',
       uploadData
       ).subscribe(
         data => {},

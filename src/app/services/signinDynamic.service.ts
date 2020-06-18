@@ -44,10 +44,10 @@ export class SigninDynamicService {
         this.subject.next(value);
     }
     signup(value) {
-      return this.http.post<AuthResponseData>('http://localhost:3001/user/signup', value);
+      return this.http.post<AuthResponseData>('https://localhost:3001/user/signup', value);
     }
     login(value) {
-      return this.http.post<AuthResponseData>('http://localhost:3001/user/login', value).pipe(
+      return this.http.post<AuthResponseData>('https://localhost:3001/user/login', value).pipe(
         tap(resData => {
           this.handleAuthentication(resData.id, resData.email, resData.token, resData.expirationDate, resData.isAdmin, resData.historyId);
         })
