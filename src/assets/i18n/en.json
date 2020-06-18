@@ -1,0 +1,41 @@
+{
+  "navbar": {
+    "veh": "Vehicles",
+    "about": "About us",
+    "loc": "Localisation",
+    "chart": "Chart",
+    "acc": "Account",
+    "logout": "Logout",
+    "night": "Night",
+    "day": "Day"
+    },
+  "homepage": {
+    "firstPar": "Make your dreams come true",
+    "secondPar": "and rent car today!",
+    "mainButton": "Check this out!",
+    "underImageText": "The best rental in Poland. The highest comfort, standard and service.",
+    "underImageTextTwo": "Trust us, come and fall in love",
+    "additionalOptionsHeader": "Various additional options",
+    "additionalOptionsText": "We offer a lot of additional packages so that your trip will better.",
+    "carsKindHeader": "A wide range of cars",
+    "carsKindText": "Sports cars, muscle cars, estate car, city cars- we have it all",
+    "chauffeurHeader": "We offer a chauffeur",
+    "chauffeurText": "Are you getting married? Do you have a bachelor party and you need a limo with a chauffeur? No problem! We canguarantee everything.",
+    "rentals": "There are our rentals",
+    "find": "Finde me here"
+  },
+  "vehicles" : {
+    "comparision": "Comparison",
+    "engineCap": "Engine capacity",
+    "enginePower": "Engine power",
+    "moreInf": "More information",
+    "addComp": "Compare",
+    "airConditioning": "Air Conditioning",
+    "manualGearbox": "Manual Gearbox",
+    "navigation": "Navigation",
+    "specyfication": "Specyfication",
+    "equipment": "Equipment",
+    "previous": "Previous",
+    "next": "Next"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "navbar": {
+    "veh": "Samochody",
+    "about": "O nas",
+    "loc": "Lokalizacja",
+    "chart": "Wykres",
+    "acc": "Konto",
+    "logout": "Wyloguj",
+    "night": "Noc",
+    "day": "Dzień"
+  },
+  "homepage": {
+    "firstPar": "Spełnij swoje marzenia już dziś",
+    "secondPar": "i wypożycz samochód!",
+    "mainButton": "Sprawdź ofertę!",
+    "underImageText": "Najlepsza wypożyczalnia w Polsce. Najwyższej jakości komfort, standardy i usługi.",
+    "underImageTextTwo": "Zaufaj nam, przyjdź, wypożycz i zakochaj się",
+    "additionalOptionsHeader": "Dodatkowe opcję wypożyczenia",
+    "additionalOptionsText": "Oferujemy dużo dodatkowych usług/opcji dzięki czemu twoja podróż będzie jeszcze lepsza.",
+    "carsKindHeader": "Różnego rodzaju samochody",
+    "carsKindText": "Sportowe samochody, muscle cary, kombi, miejskie samochody-mamy je wszystkie.",
+    "chauffeurHeader": "Oferujemy szofera",
+    "chauffeurText": "Planujesz wesele? Masz imprezę kawalerską i potrzebujesz limuzyny z szoferem? Nie ma problemu! Zapewnimy wszystko.",
+    "rentals": "Oto nasze wypożyczalnie",
+    "find": "Znajdziesz mnie tutaj"
+  },
+  "vehicles" : {
+    "comparision": "Zestawienie",
+    "engineCap": "Pojemność silnika",
+    "enginePower": "Moc samochodu",
+    "moreInf": "Więcej informacji",
+    "addComp": "Porównaj",
+    "airConditioning": "Klimatyzacja",
+    "manualGearbox": "Manualna",
+    "navigation": "Nawigacja",
+    "specyfication": "Specyfikacja",
+    "equipment": "Wyposażenie",
+    "previous": "Wróć",
+    "next": "Dalej"
+  }
+}

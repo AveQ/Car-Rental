@@ -14,7 +14,7 @@ import { DarkModeService } from './services/darkMode.service';
 import { FooterComponent } from './homepage/footer/footer.component';
 import { LocalisationComponent } from './localisation/localisation.component';
 import { AddNewCarComponent } from './add-new-car/add-new-car.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpClient} from '@angular/common/http';
 import { FindVehicleComponent } from './find-vehicle/find-vehicle.component';
 import {ScrollToModule} from 'ng2-scroll-to';
 import { CheckDateComponent } from './find-vehicle/check-date/check-date.component';
@@ -34,6 +34,9 @@ import {ModalLoginComponent} from './auth/modal/modalLogin.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {AuthGuard} from './services/auth-guard.service';
 import {AuthGuardAdmin} from './services/auth-guard-admin.service';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
 const appRoutes: Routes = [
 
 
@@ -70,7 +73,14 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     ScrollToModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [DarkModeService,
     AuthGuard,
@@ -85,3 +95,7 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

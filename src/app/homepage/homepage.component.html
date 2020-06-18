@@ -1,8 +1,8 @@
 <div class="homepage-image">
     <div class="homepage-text">
-        <p class="firstPar">Make your dreams come true</p>
-        <p class="secondPar">and rent car today!</p>
-        <button [routerLink]="['/vehicles']" [queryParams]="{page: 1}" class =" btn btn-outline-light btn-homepage">Check this out!</button>
+        <p class="firstPar">{{"homepage.firstPar" | translate}}</p>
+        <p class="secondPar">{{"homepage.secondPar" | translate}}</p>
+        <button [routerLink]="['/vehicles']" [queryParams]="{page: 1}" class =" btn btn-outline-light btn-homepage">{{"homepage.mainButton" | translate}}</button>
     </div>
 </div>
 <div class="underImage" [ngClass]="changeMode('underImage')">

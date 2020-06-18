@@ -34,7 +34,7 @@
         </span>
     <div class="nav-languages" [ngClass]="openLanguageList()">
       <ul class="nav-languages-menu">
-        <li class="nav-language-element">
+        <li (click)="changeLanguage('pl')" class="nav-language-element">
 
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 172 172"
                style=" fill:#000000;">
@@ -53,7 +53,7 @@
             Polski
           </span>
         </li>
-        <li class="nav-language-element">
+        <li (click)="changeLanguage('en')" class="nav-language-element">
           <img src="https://img.icons8.com/color/48/000000/usa.png"/>
           <span class="nav-language-fullname">
             English
@@ -66,7 +66,7 @@
     <ul class="nav-list">
       <li class="nav-element" [ngClass]="changeMode('element')">
         <a [routerLink]="['/vehicles']" [queryParams]="{page: 1}" class="nav-link" [ngClass]="changeMode('link')" (click)="closeMainMenu()">
-          <span>Vehicles</span>
+          <span>{{ 'navbar.veh' | translate }}</span>
           <svg class="nav-menu-image" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40"
                height="40" viewBox="0 0 172 172" style=" fill:#000000;">
             <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
@@ -85,19 +85,19 @@
       </li>
       <li (click)="scrollInto('aboutUs', 'aboutUs')" class="nav-element">
         <a class="nav-link" [ngClass]="changeMode('link')" style="cursor: pointer" (click)="closeMainMenu()">
-          <span>About us</span>
+          <span>{{ 'navbar.about' | translate }}</span>
           <img class="nav-menu-image" src="https://img.icons8.com/carbon-copy/40/000000/info.png"/>
         </a>
       </li>
       <li (click)="scrollInto('localisation', 'localisation')" class="nav-element">
         <a class="nav-link" [ngClass]="changeMode('link')" style="cursor: pointer" (click)="closeMainMenu()">
-          <span>Localisation</span>
+          <span>{{ 'navbar.loc' | translate }}</span>
           <img class="nav-menu-image" src="https://img.icons8.com/carbon-copy/40/000000/map.png"/>
         </a>
       </li>
       <li class="nav-element">
         <a class="nav-link" routerLink='/statistics' [ngClass]="changeMode('link')" style="cursor: pointer" (click)="closeMainMenu()">
-          <span>Chart</span>
+          <span>{{ 'navbar.chart' | translate }}</span>
           <img class="nav-menu-image" src="https://img.icons8.com/carbon-copy/40/000000/map.png"/>
         </a>
       </li>
@@ -121,7 +121,7 @@
       </a></li>
       <li *ngIf="isAuthenticated" class="nav-element">
         <a routerLink="/account" class="nav-link" [ngClass]="changeMode('link')" (click)="closeMainMenu()">
-          <span>Account</span>
+          <span>{{ 'navbar.acc' | translate }}</span>
           <img class="nav-menu-image" src="https://img.icons8.com/cotton/40/000000/settings--v1.png"/>
         </a>
       </li>
@@ -133,15 +133,15 @@
       </li>
       <li *ngIf="isAuthenticated"class="nav-element">
         <a (click) = "logout()" routerLink='/' class="nav-link" (click)="closeMainMenu()">
-          <span>Logout</span>
+          <span>{{ 'navbar.logout' | translate }}</span>
           <img class="nav-menu-image" src="https://img.icons8.com/cotton/40/000000/settings--v1.png"/>
         </a>
       </li>
     </ul>
     <div class="select-mode">
-            <span class="mode mode-night" (click)="otherMode(true)">Night <img
+            <span class="mode mode-night" (click)="otherMode(true)">{{ 'navbar.night' | translate }} <img
               src="https://img.icons8.com/plasticine/30/000000/crescent-moon.png"/></span>
-      <span class="mode mode-day" (click)="otherMode(false)">Day <img
+      <span class="mode mode-day" (click)="otherMode(false)">{{ 'navbar.day' | translate }} <img
         src="https://img.icons8.com/officel/30/000000/sun.png"/></span>
     </div>
   </div>

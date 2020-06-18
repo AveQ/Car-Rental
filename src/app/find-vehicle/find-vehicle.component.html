@@ -7,7 +7,7 @@
     </div>
     <div class="col-lg-4 col-sm-12 text-lg-right text-sm-center">
       <button class="btn btn-outline-dark m-3" (click)='filters = !filters;'>Filters</button>
-      <button class="btn btn-outline-dark m-3" (click)='comparison()'>Comparison</button>
+      <button class="btn btn-outline-dark m-3" (click)='comparison()'> {{"vehicles.comparision" | translate}}</button>
     </div>
   </div>
   <div [ngClass]="{'filters--open': filters === true}" class="row  border pt-3 filters">
@@ -53,12 +53,12 @@
       </div>
       <h3 class="car__title">{{carList[i].brand}} {{carList[i].model}}</h3>
 
-      <p class="car__engine">Engine capacity: {{carList[i].capacity}} cm&#179; <br>Engine power:
+      <p class="car__engine">{{"vehicles.engineCap" | translate}}: {{carList[i].capacity}} cm&#179; <br>{{"vehicles.enginePower" | translate}}:
         {{carList[i].horsepower}} hp</p>
       <hr>
       <div class="car__options">
         <small class="car__additional">
-          Air Conditioning:
+          {{"vehicles.airConditioning" | translate}}:
           <div *ngIf="carList[i].airConditioning; then thenBlock else elseBlock"></div>
           <ng-template #thenBlock>
             <div class="check"></div>
@@ -68,7 +68,7 @@
           </ng-template>
         </small>
         <small class="car__additional">
-          Manual gearbox:
+          {{"vehicles.manualGearbox" | translate}}:
           <div *ngIf="carList[i].manual; then thenBlock else elseBlock"></div>
           <ng-template #thenBlock>
             <div class="check"></div>
@@ -78,7 +78,7 @@
           </ng-template>
         </small>
         <small class="car__additional">
-          Navigation:
+          {{"vehicles.navigation" | translate}}:
           <div *ngIf="carList[i].navigation; then thenBlock else elseBlock"></div>
           <ng-template #thenBlock>
             <div class="check"></div>
@@ -98,7 +98,7 @@
     </div>
     <div class="row button-container-info">
       <div class="col-12 text-center">
-        <button class="btn btn-outline-dark" (click)="openCarInformation(additInfo)">More information</button>
+        <button class="btn btn-outline-dark" (click)="openCarInformation(additInfo)">{{"vehicles.moreInf" | translate}}</button>
       </div>
     </div>
     <!--
@@ -109,7 +109,7 @@
         <h2>Additional informations</h2>
       </div>
       <div class="col-6 header-other">
-        <h5 class="main-header">Specyfication</h5>
+        <h5 class="main-header">{{"vehicles.specyfication" | translate}}</h5>
         <hr class="underline-informations">
         <ul class="list-add-info">
           <li class="addit-info-car">Brand: {{carList[i].brand}}</li>
@@ -171,7 +171,7 @@
         </ul>
       </div>
       <div class="col-6 header-other">
-        <h5 class="main-header">Equipment</h5>
+        <h5 class="main-header">{{"vehicles.equipment" | translate}}</h5>
         <hr class="underline-informations">
         <ul class="list-add-info">
           <li class="addit-info-car">Manual:
@@ -263,9 +263,9 @@
   </div>
   <nav class="mt-5">
     <ul class="pagination" style="cursor: pointer">
-      <li class="page-item"><a class="page-link" (click) = "previousPage()" >Previous</a></li>
+      <li class="page-item"><a class="page-link" (click) = "previousPage()" >{{"vehicles.previous" | translate}}</a></li>
       <li class="page-item"><a class="page-link" >{{page}}</a></li>
-      <li class="page-item"><a class="page-link" (click) = "nextPage()" >Next</a></li>
+      <li class="page-item"><a class="page-link" (click) = "nextPage()" >{{"vehicles.next" | translate}}</a></li>
     </ul>
   </nav>
 </div>
